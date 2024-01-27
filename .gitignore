@@ -8,7 +8,8 @@
 /.bundle
 
 # Ignore all environment files (except templates).
-/.env*
+# MEMO: 以下に.envを追記しておくことで、gitに追跡されないようにする
+/.env
 !/.env*.erb
 
 # Ignore all logfiles and tempfiles.

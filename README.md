@@ -5,20 +5,23 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+-   Ruby version
 
-* System dependencies
+-   System dependencies
 
-* Configuration
+-   Configuration
 
-* Database creation
+-   Database creation
+    1, ルートディレクトリに.env ファイルを作成、DB 情報を設定
+    2, rails db:create を実行し DB 作成
+    3, rails db:migrate を実行しマイグレーション実施
 
-* Database initialization
+-   Database initialization
 
-* How to run the test suite
+-   How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+-   Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+-   Deployment instructions
 
-* ...
+-   ...
