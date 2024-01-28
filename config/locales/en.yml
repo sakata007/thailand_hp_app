@@ -27,5 +27,53 @@
 #       "yes": yup
 #       enabled: "ON"
 
+# config/locales/en.yml
 en:
-  hello: "Hello world"
+    hello: "Hello world"
+    date:
+        formats:
+            default: "%Y-%m-%d"
+        abbr_month_names:
+            -
+            - Jan
+            - Feb
+            - Mar
+            - Apr
+            - May
+            - Jun
+            - Jul
+            - Aug
+            - Sep
+            - Oct
+            - Nov
+            - Dec
+        month_names:
+            -
+            - January
+            - February
+            - March
+            - April
+            - May
+            - June
+            - July
+            - August
+            - September
+            - October
+            - November
+            - December
+        abbr_day_names:
+            - Sun
+            - Mon
+            - Tue
+            - Wed
+            - Thu
+            - Fri
+            - Sat
+        day_names:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday

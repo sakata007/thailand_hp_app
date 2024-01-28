@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active {
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    height: auto;
+    opacity: 1;
+}
+.fixed {
+    position: fixed;
+    z-index: 99;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+}
+.top-image {
+    width: 100%;
+    aspect-ratio: 5 / 2;
+    object-fit: cover;
+}
+@media screen and (max-width: 639px) {
+    .top-image {
+        width: 100%;
+        aspect-ratio: 5 / 3;
+        object-fit: cover;
+    }
+}
