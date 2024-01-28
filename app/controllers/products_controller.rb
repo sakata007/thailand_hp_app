@@ -4,22 +4,22 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def create
+    @product = Product.new
+  end
+
+  def store
+    #
+  end
+
   def confirm
     puts "------"
     puts "confirm"
     puts "------"
-    # @products = Product.all
 
-    # Turbo Streams を使用せずに通常の HTML レスポンスを返す
-    # respond_to do |format|
-    #   format.html { render "order/confirm" }
-    # end
     render "confirm"
   end
 
-  def confirm2
-    render "products/confirm2"
-  end
 
   # def info
   #   render "confirm"
