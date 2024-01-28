@@ -30,6 +30,9 @@
 # config/locales/en.yml
 en:
     hello: "Hello world"
+    helpers:
+        choose: "Choose a file"
+        prompt: "No file chosen"
     date:
         formats:
             default: "%Y-%m-%d"
