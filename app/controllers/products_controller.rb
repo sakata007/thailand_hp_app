@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
     puts @product.choices
     puts "------"
     
+    # MEMO: { num => {"gram" => gram, "price" => price}, ...}の形でjsonに入れてもいいかもしれない
     input_hash = @product.choices
     json_array = input_hash.map do |key, value|
       { "gram" => value["gram"], "price" => value["price"] }
