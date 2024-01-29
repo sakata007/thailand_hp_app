@@ -19,6 +19,17 @@ class ProductsController < ApplicationController
     puts @product.sold_out_flg
     puts @product.choices
     puts "------"
+    
+    input_hash = @product.choices
+    json_array = input_hash.map do |key, value|
+      { "gram" => value["gram"], "price" => value["price"] }
+    end.to_json
+    
+    # puts "------"
+    # puts "json_array"
+    # puts json_array
+    # puts json_array[1]
+    # puts "------"
 
     # if @product.save
     #   redirect_to top_path
