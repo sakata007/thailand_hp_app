@@ -20,11 +20,11 @@ class ProductsController < ApplicationController
     puts @product.choices
     puts "------"
 
-    if @product.save
-      redirect_to top_path
-    else 
-      render :create
-    end
+    # if @product.save
+    #   redirect_to top_path
+    # else 
+    #   render :create
+    # end
   end
 
   def confirm
@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :summary, :image, :choices, :sold_out_flg)
+    params.require(:product).permit(:name, :summary, :image, :sold_out_flg, choices: {} )
   end
   
 end

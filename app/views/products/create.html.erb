@@ -90,54 +90,36 @@
 
                 <div>
                     <p class="block text-sm font-semibold leading-6 text-gray-900">Purchase options</p>
-                    <div class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <div class="flex justify-between">
-                            <div class="w-1/3">
-                                <%= form.label :choices, "grams", class: "block text-sm font-semibold leading-6 text-gray-900"%>
-                                <div class="mt-2.5 flex">
-                                    <%= form.text_field :choices, placeholder: "3", class: "block w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-                                    <p class="inline-block w-1/3 text-center pt-4">g</p>
+                    <%# 追加ボタンクリックによりadded-blockが増える（indexの値は1足された状態） %>
+                    <div id="form-container">
+                        <div class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <%= form.fields_for :choices, index: 0 do |choices_form| %>
+                                <div class="flex justify-between">
+                                    <div class="w-1/3">
+                                        <%= choices_form.label :gram, "grams", class: "block text-sm font-semibold leading-6 text-gray-900"%>
+                                        <div class="mt-2.5 flex">
+                                            <%= choices_form.text_field :gram, placeholder: "3", class: "block w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+                                            <p class="inline-block w-1/3 text-center pt-4">g</p>
+                                        </div>
+                                    </div>
+                                    <div class="w-1/12 mt-12">
+                                        <p class="inline-block w-full text-center">/</p>
+                                    </div>
+                                    <div class="w-1/2">
+                                        <%= choices_form.label :price, "price", class: "block text-sm font-semibold leading-6 text-gray-900"%>
+                                        <div class="mt-2.5 flex">
+                                            <%= choices_form.text_field :price, placeholder: "1500", class: "block  w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+                                            <p class="inline-block w-1/3 text-center pt-4">baht</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="w-1/12 mt-12">
-                                <p class="inline-block w-full text-center">/</p>
-                            </div>
-                            <div class="w-1/2">
-                                <%= form.label :choices, "price", class: "block text-sm font-semibold leading-6 text-gray-900"%>
-                                <div class="mt-2.5 flex">
-                                    <%= form.text_field :choices, placeholder: "1500", class: "block  w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-                                    <p class="inline-block w-1/3 text-center pt-4">baht</p>
-                                </div>
-                            </div>
-                        </div>
+                            <% end %><%# /fields_for %>
+                        </div><%# /added-block %>
                     </div>
-                    <%#  %>
-                    <div class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                        <div class="flex justify-between">
-                            <div class="w-1/3">
-                                <%= form.label :choices, "grams", class: "block text-sm font-semibold leading-6 text-gray-900"%>
-                                <div class="mt-2.5 flex">
-                                    <%= form.text_field :choices, placeholder: "3", class: "block w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-                                    <p class="inline-block w-1/3 text-center pt-4">g</p>
-                                </div>
-                            </div>
-                            <div class="w-1/12 mt-12">
-                                <p class="inline-block w-full text-center">/</p>
-                            </div>
-                            <div class="w-1/2">
-                                <%= form.label :choices, "price", class: "block text-sm font-semibold leading-6 text-gray-900"%>
-                                <div class="mt-2.5 flex">
-                                    <%= form.text_field :choices, placeholder: "1500", class: "block  w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-                                    <p class="inline-block w-1/3 text-center pt-4">baht</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <%#  %>
                     <%# TODO: JSでボタンを押下した時にフォームを増やす %>
-                    <button type="submit" class="block rounded-md bg-lime-600 mt-2 sm:mt-1.5  px-3.5 py-1.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">＋ Increase purchasing options</button>
-
+                    <button type="button" onclick="addForm()" class="js-add-option block rounded-md bg-lime-600 mt-2 sm:mt-1.5  px-3.5 py-1.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">＋ Increase purchasing options</button>
                 </div>
+
                 <div>
                 </div>
 
@@ -167,4 +149,39 @@
         mobileMenu.classList.toggle('hidden');
         });
     });
+
+
+    let index = 1;
+
+    // 追加ボタン押下でフォームが増える
+    function addForm() {
+        const formContainer = document.getElementById('form-container');
+        const newForm = document.createElement('div');
+        newForm.innerHTML = `
+                        <div class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <div class="flex justify-between">
+                                <div class="w-1/3">
+                                    <label class="block text-sm font-semibold leading-6 text-gray-900" for="product[choices][${index}][gram]">grams</label>
+                                    <div class="mt-2.5 flex">
+                                        <input placeholder="3" class="block w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="product[choices][${index}][gram]" id="product_choices_1_gram">
+                                        <p class="inline-block w-1/3 text-center pt-4">g</p>
+                                    </div>
+                                </div>
+                                <div class="w-1/12 mt-12">
+                                    <p class="inline-block w-full text-center">/</p>
+                                </div>
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-semibold leading-6 text-gray-900" for="product[choices][${index}][price]">price</label>
+                                    <div class="mt-2.5 flex">
+                                        <input placeholder="1500" class="block  w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" type="text" name="product[choices][${index}][price]" id="product_choices_1_price">
+                                        <p class="inline-block w-1/3 text-center pt-4">baht</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+        formContainer.appendChild(newForm);
+
+        index += 1;
+    }
 </script>
