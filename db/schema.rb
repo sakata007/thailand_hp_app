@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_28_133349) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_30_002951) do
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,11 +40,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_28_133349) do
   end
 
   create_table "products", charset: "utf8mb3", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.text "summary", null: false
+    t.text "detail"
+    t.boolean "sold_out_flg", default: false, null: false
+    t.json "choices", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "fast_shipping_flg", default: false, null: false
+  end
+
+  create_table "settings", charset: "utf8mb3", force: :cascade do |t|
+    t.string "site_name", null: false
+    t.string "top_img"
+    t.text "privacy_policy"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "shops", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
     t.text "summary"
     t.text "detail"
-    t.boolean "sold_out_flg"
-    t.json "choices"
+    t.string "email", limit: 100, null: false
+    t.string "address"
+    t.string "phone_number", limit: 20
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
