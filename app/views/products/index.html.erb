@@ -226,13 +226,15 @@
                                 <div class="relative mt-2">
                                     <select name="" id="" class="appearance-none relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
                                         <option value="">select choices</option>
-                                        <%# TODO: ハッシュの値をeach分で回し、gramをvalueの値とspan(gram)内の文字列、priceをspan(price)内の文字列にする %>
-                                        <%# MEMO: または、valueの値に「3g/1500baht」のような文字列を格納しておく？ %>
-                                        <option value="1"><span class="gram">3</span>g / <span class="price">1500</span>baht</option>
-                                        <option value="2"><span class="gram">6</span>g / <span class="price">3000</span>baht</option>
-                                        <option value="3"><span class="gram">9</span>g / <span class="price">4500</span>baht</option>
-                                        <%# eachここまで %>
+                                        <% product.choices.each do |hash| %>
+                                            <% hash.each do |id, value| %>
+                                            <option value="<%= id %>">
+                                                <span class=""><%= value["gram"] %></span>g / <span class="price"><%= value["price"] %></span>baht
+                                            </option>
+                                            <% end %>
+                                        <% end %>
                                         <option value="">more</option>
+ 
                                     </select>
                                     <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
                                         <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

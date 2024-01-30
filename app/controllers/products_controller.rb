@@ -2,6 +2,37 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    @products.each do |product|
+      puts "------"
+      hash = JSON.parse(product.choices)
+      product.choices = hash
+      puts hash
+      # puts product.choices
+      hash.each do |key|
+        puts "---↓keyです---"
+        puts key
+          key.each do |id, value|
+            puts "---↓idです---"
+            puts id
+            puts "---↓valueです---"
+            puts value
+          end
+        # puts key
+        # key.each do |id, keyword|
+        #   puts "---↓idです---"
+        #   puts id
+        #   puts "---↓keywordです---"
+        #   puts keyword["gram"]
+        #   puts keyword["price"]
+        # end
+        # puts "---↓valueです---"
+        # puts value
+      end
+
+      puts "------"
+      
+    end
+    # @product_choices = @products.map { |product| JSON.parse(product.choices) }
   end
 
   def create
