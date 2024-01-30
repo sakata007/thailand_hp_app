@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration[7.1]
       t.text :summary
       t.text :detail
       t.boolean :sold_out_flg
+      t.boolean :fast_shipping_flg
       t.json :choices
       t.timestamps
     end

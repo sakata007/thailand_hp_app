@@ -26,3 +26,9 @@ Things you may want to cover:
 -   Deployment instructions
 
 -   ...
+
+-   tailwindcssを読み込ませるまでの流れ
+　　１, node -v # Node.jsのバージョン確認
+　　２,npm -v # npmのバージョン確認
+　　３,sudo npm install -g yarn # yarnインストール
+　　４,yarn add tailwindcss #tailwindcssのインストール
