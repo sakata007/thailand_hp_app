@@ -21,10 +21,9 @@ class ProductsController < ApplicationController
     puts "------"
     
     # MEMO: { num => {"gram" => gram, "price" => price}, ...}の形でjsonに入れてもいいかもしれない
-    # MEMO2:numが０からになっています。
     input_hash = @product.choices
     json_array = input_hash.map.with_index do |(key, value), index|
-      [index , { "gram" => value["gram"], "price" => value["price"] }]
+      {index+1  => { "gram" => value["gram"], "price" => value["price"] }}
     end.to_json  
     
     puts "------"
