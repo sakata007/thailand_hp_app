@@ -21,22 +21,27 @@ class ProductsController < ApplicationController
     puts "------"
     
     # MEMO: { num => {"gram" => gram, "price" => price}, ...}の形でjsonに入れてもいいかもしれない
+    # MEMO2:numが０からになっています。
     input_hash = @product.choices
-    json_array = input_hash.map do |key, value|
-      { "gram" => value["gram"], "price" => value["price"] }
-    end.to_json
+    json_array = input_hash.map.with_index do |(key, value), index|
+      [index , { "gram" => value["gram"], "price" => value["price"] }]
+    end.to_json  
     
-    # puts "------"
-    # puts "json_array"
-    # puts json_array
-    # puts json_array[1]
-    # puts "------"
+    puts "------"
+    puts "json_array"
+    puts json_array
+    puts json_array[1]
+    puts "------"
 
-    # if @product.save
-    #   redirect_to top_path
-    # else 
-    #   render :create
-    # end
+    @product.choices = json_array
+
+    puts @product.choices
+
+    if @product.save
+      redirect_to top_path
+    else 
+      render :create
+    end
   end
 
   def confirm
