@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    @product_choices = @products.map { |product| JSON.parse(product.choices) }
   end
 
   def create
