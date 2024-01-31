@@ -73,36 +73,20 @@
                         <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                             <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
                                 <%# TODO: liを繰り返し処理で出力、配列とかで商品情報を格納し、メール本文に反映 %>
-                                <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                                    <div class="flex w-0 flex-1 items-center">
-                                        <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">productA</span>
-                                    </div>
-                                    <div class="flex w-0 flex-1 items-center">
-                                        <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">3g / 1500baht</span>
-                                    </div>
-                                </li>
-                                
-                                <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                                    <div class="flex w-0 flex-1 items-center">
-                                        <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">productB</span>
-                                    </div>
-                                    <div class="flex w-0 flex-1 items-center">
-                                        <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">3g / 1500baht</span>
-                                    </div>
-                                </li>
-                                
-                                <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                                    <div class="flex w-0 flex-1 items-center">
-                                        <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">productC</span>
-                                    </div>
-                                    <div class="flex w-0 flex-1 items-center">
-                                        <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">3g / 1500baht</span>
-                                    </div>
-                                </li>
+                                <% @selected_products.each do |key, value| %>
+                                    <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                        <div class="flex w-0 flex-1 items-center">
+                                            <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= value["product_name"] %></span>
+                                        </div>
+                                        <div class="flex w-0 flex-1 items-center">
+                                            <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= value["choice"] %></span>
+                                        </div>
+                                    </li>
+                                <% end %>
                                 <%# 繰り返しここまで %>
                             </ul>
                         </dd>
-                        <dt class="text-sm font-medium leading-6 text-gray-900">Total price</dt>
+                        <dt class="text-sm font-medium leading-6 text-gray-900 mt-3">Total price</dt>
                         <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                             <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
                                 <%# TODO: liを繰り返し処理で出力 %>
@@ -111,7 +95,7 @@
                                         <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Billing amount</span>
                                     </div>
                                     <div class="flex w-0 flex-1 items-center">
-                                        <span class="font-bold mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">1500baht</span>
+                                        <span class="font-bold mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_price %>baht</span>
                                         <%# TODO: valueに値を持たせる %>
                                         <%= form.hidden_field :total_price %>
                                     </div>
@@ -122,31 +106,31 @@
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Your name</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Yamada Taro</dd>
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @name %></dd>
                         <%# TODO: valueに値を持たせる %>
                         <%= form.hidden_field :customer_name %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Shipping address</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">1819/246 Soi Sathu Pradit 57 Bang Phong Phang, Yan Nawa, Bangkok 10120</dd>
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @address %></dd>
                         <%# TODO: valueに値を持たせる %>
                         <%= form.hidden_field :customer_shipping_address %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt class="text-sm font-medium leading-6 text-gray-900">Shipping address</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">1819/246 Soi Sathu Pradit 57 Bang Phong Phang, Yan Nawa, Bangkok 10120</dd>
+                        <dt class="text-sm font-medium leading-6 text-gray-900">Delivery date and time</dt>
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @date %></dd>
                         <%# TODO: valueに値を持たせる %>
                         <%= form.hidden_field :customer_delivery_date_and_time %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Your Email</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">takeruaruketa@gmail.com</dd>
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @email %></dd>
                         <%# TODO: valueに値を持たせる %>
                         <%= form.hidden_field :customer_email %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Your phone number</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">0123-4567-8910</dd>
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @phone_number %></dd>
                         <%# TODO: valueに値を持たせる %>
                         <%= form.hidden_field :customer_phone_number %>
                     </div>
