@@ -59,7 +59,7 @@
     <main>
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <%# メインコンテンツ %>
-            <%= form_with url: confirm_path, local: true do |form| %>
+            <%= form_with model: @order, url: confirm_path, local: true, class: "mx-auto mt-16 max-w-xl sm:mt-20" do |form| %>
             <div class="bg-white">
                 <%# TODO: productが存在する条件文 %>
                 <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-18 lg:max-w-7xl lg:px-8">
@@ -207,8 +207,8 @@
 
                         <%# 商品カード(DB)  %>
                         <% @products.each do |product| %>
-                            <input value="<%= product.name%>" autocomplete="off" type="hidden" name="order[<%= product.id %>][product_name]" id="_order_29_product_name">
                                 <div class="group relative">
+                                    <input value="<%= product.name %>" autocomplete="off" type="hidden" name="order[select][<%= product.id %>][product_name]" id="_order_29_product_name">
                                     <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                                         <%= image_tag "taima.png", alt: '', class: "h-full w-full object-cover object-center lg:h-full lg:w-full" %>
                                     </div>
@@ -225,15 +225,16 @@
                                     </div>
                                     <div class="w-2/3">
                                         <div class="relative mt-2">
-                                            <select name="order[<%= product.id %>][choice]" id="" class="appearance-none relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                                            <input value="" autocomplete="off" type="hidden" name="order[select][<%= product.id %>][price]" id="">
+                                            <select name="order[select][<%= product.id %>][choice]" id="" class="choices_select appearance-none relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
                                                 <option value="">select choices</option>
                                                 <% product.choices.each do |hash| %>
                                                     <% hash.each do |id, value| %>
-                                                    <%# {gram}g/{price}bathの形でoptionのvalueに代入 %>
-                                                    <% input_value = value["gram"] + "g/" + value["price"] + "baht" %>
-                                                    <option value="<%= input_value %>" class="choices_option">
-                                                        <span class=""><%= value["gram"] %></span>g / <span class="price"><%= value["price"] %></span>baht
-                                                    </option>
+                                                        <%# {gram}g/{price}bathの形でoptionのvalueに代入 %>
+                                                        <% input_text = value["gram"] + "g/" + value["price"] + "baht" %>
+                                                        <option value="<%= input_text %>" class="choices_option">
+                                                            <span class=""><%= value["gram"] %></span>g / <span class="price"><%= value["price"] %></span>baht
+                                                        </option>
                                                     <% end %><%# /hash.each %>
                                                 <% end %><%# /product.choices.each %>
                                                 <option value="">more</option>
@@ -261,47 +262,48 @@
                     </div>
 
                     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                            <div>
-                                <%= form.label :name, "Your name", class: "block text-sm font-medium leading-6 text-gray-900" %>
-                                <div class="mt-2">
-                                    <%= form.text_field :name, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-                                </div>
+                        <div>
+                            <%= form.label :name, "Your name", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                            <div class="mt-2">
+                                <%= form.text_field :name, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
                             </div>
+                        </div>
 
-                            <div>
-                                <%= form.label :address, "Shipping address", class: "block text-sm font-medium leading-6 text-gray-900" %>
-                                <div class="mt-2">
-                                    <%= form.text_field :address, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-                                </div>
+                        <div>
+                            <%= form.label :address, "Shipping address", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                            <div class="mt-2">
+                                <%= form.text_field :address, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
                             </div>
+                        </div>
 
-                            <div>
-                                <%= form.label :date, "Desired delivery date and time", class: "block text-sm font-medium leading-6 text-gray-900" %>
-                                <div class="mt-2">
-                                    <%= form.datetime_field :date, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-                                </div>
+                        <div>
+                            <%= form.label :date, "Desired delivery date and time", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                            <div class="mt-2">
+                                <%= form.datetime_field :date, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
                             </div>
+                        </div>
 
-                            <div>
-                                <%= form.label :email, "Your email", class: "block text-sm font-medium leading-6 text-gray-900" %>
-                                <div class="mt-2">
-                                    <%= form.text_field :email, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-                                </div>
+                        <div>
+                            <%= form.label :email, "Your email", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                            <div class="mt-2">
+                                <%= form.text_field :email, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
                             </div>
+                        </div>
 
-                            <div>
-                                <%= form.label :phone_number, "Your phone number", class: "block text-sm font-medium leading-6 text-gray-900" %>
-                                <div class="mt-2">
-                                    <%= form.text_field :phone_number, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
-                                </div>
+                        <div>
+                            <%= form.label :phone_number, "Your phone number", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                            <div class="mt-2">
+                                <%= form.text_field :phone_number, class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
                             </div>
+                        </div>
 
-                            <div>
-                                <%= form.submit "Confirm order details", class: "flex w-full justify-center rounded-md bg-lime-600 mt-6 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600" %>
-                            </div>
+                        <div>
+                            <%= form.submit "Confirm order details", class: "flex w-full justify-center rounded-md bg-lime-600 mt-6 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600" %>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div><%# オーダー情報ここまで %>
+
             <% end %><%# /form_with %>
 
             <%# 店舗情報 %>
@@ -391,5 +393,34 @@
         mobileMenuButton.addEventListener('click', function () {
         mobileMenu.classList.toggle('hidden');
         });
+
+        // セレクトボックスが変更されたときの処理
+        document.querySelectorAll('.choices_select').forEach(function(select) {
+            select.addEventListener('change', function() {
+                
+                // 選択されたオプションの値を取得
+                let selectedOption = select.options[select.selectedIndex];
+
+                let inputString = selectedOption.innerText;
+
+                // 正規表現パターン
+                let pattern = /(\d+)g \/ (\d+)baht/;
+
+                // パターンに一致する部分を抽出
+                let matchResult = inputString.match(pattern);
+                console.log(matchResult);
+
+                // マッチした部分の数値を取り出す
+                if (matchResult && matchResult[1] && matchResult[2]) {
+                let priceValue = parseInt(matchResult[2], 10);
+
+                // 非表示のinputタグを取得
+                let target = this.previousElementSibling;
+
+                target.value = priceValue;
+                }
+            });
+        });
+
     });
 </script>
