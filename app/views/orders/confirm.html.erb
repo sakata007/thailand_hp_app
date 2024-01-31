@@ -65,7 +65,7 @@
                     <h3 class="text-base font-semibold leading-7 text-gray-900">Shop Information</h3>
                     <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Leave your cannabis order to us.</p>
                 </div>
-                <%= form_with url: confirm_path, local: true do |form| %>
+                <%= form_with url: complete_path, local: true do |form| %>
                 <div class="mt-6 border-t border-gray-100">
                     <dl class="divide-y divide-gray-100">
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -84,6 +84,7 @@
                                     </li>
                                 <% end %>
                                 <%# 繰り返しここまで %>
+                                <%= form.hidden_field :order_products, value: @selected_products %>
                             </ul>
                         </dd>
                         <dt class="text-sm font-medium leading-6 text-gray-900 mt-3">Total price</dt>
@@ -97,7 +98,7 @@
                                     <div class="flex w-0 flex-1 items-center">
                                         <span class="font-bold mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_price %>baht</span>
                                         <%# TODO: valueに値を持たせる %>
-                                        <%= form.hidden_field :total_price %>
+                                        <%= form.hidden_field :total_price, value: @total_price %>
                                     </div>
                                 </li>
                                 <%# ここまで %>
@@ -108,31 +109,31 @@
                         <dt class="text-sm font-medium leading-6 text-gray-900">Your name</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @name %></dd>
                         <%# TODO: valueに値を持たせる %>
-                        <%= form.hidden_field :customer_name %>
+                        <%= form.hidden_field :customer_name, value:@name %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Shipping address</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @address %></dd>
                         <%# TODO: valueに値を持たせる %>
-                        <%= form.hidden_field :customer_shipping_address %>
+                        <%= form.hidden_field :customer_shipping_address, value:@address %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Delivery date and time</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @date %></dd>
                         <%# TODO: valueに値を持たせる %>
-                        <%= form.hidden_field :customer_delivery_date_and_time %>
+                        <%= form.hidden_field :customer_delivery_date_and_time, value:@date %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Your Email</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @email %></dd>
                         <%# TODO: valueに値を持たせる %>
-                        <%= form.hidden_field :customer_email %>
+                        <%= form.hidden_field :customer_email, value:@email %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Your phone number</dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @phone_number %></dd>
                         <%# TODO: valueに値を持たせる %>
-                        <%= form.hidden_field :customer_phone_number %>
+                        <%= form.hidden_field :customer_phone_number, value: @phone_number %>
                     </div>
                     <div></div>
                     </dl>

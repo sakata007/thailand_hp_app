@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   post '/confirm'=> 'orders#confirm', as: 'confirm'
+  post '/complete'=> 'orders#complete', as: 'complete'
   get '/'=> 'orders#index', as: 'top'
   
   # TODO: /admin以下にbasic認証
