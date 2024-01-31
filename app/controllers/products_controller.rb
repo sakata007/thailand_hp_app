@@ -1,14 +1,8 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all
-
-    # choicesのjsonをハッシュに戻す処理
-    @products.each do |product|
-      hash = JSON.parse(product.choices)
-      product.choices = hash
-      end      
-    end
+    #管理者の商品一覧画面  
+  end
 
   def create
     @product = Product.new
@@ -32,33 +26,10 @@ class ProductsController < ApplicationController
     end
   end
 
-  def confirm
-    # TODO Order.new(order_params)の形にする
-    @params = order_params
-    puts "------"
-    puts "↓オーダー"
-    puts @params["order"]
-    puts "↓名前"
-    puts @params["name"]
-    puts "------"
-
-    render "confirm"
-  end
-
-
-  # def info
-  #   render "confirm"
-  # end
-
   private
 
   def product_params
     params.require(:product).permit(:name, :summary, :image, :sold_out_flg, choices: {} )
-  end
-
-  def order_params
-    # TODO: orderモデル（Active Model）作成
-    params.permit(:authenticity_token, :name, :address, :date, :email, :phone_number, :commit, order: {} )
   end
 
 end
