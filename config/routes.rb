@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
-  post '/confirm'=> 'products#confirm', as: 'confirm'
-  get '/'=> 'products#index', as: 'top'
+  post '/confirm'=> 'orders#confirm', as: 'confirm'
+  get '/'=> 'orders#index', as: 'top'
   
   # TODO: /admin以下にbasic認証
   get '/admin/products/create'=> 'products#create', as: 'create_product'
