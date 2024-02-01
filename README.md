@@ -20,6 +20,7 @@ Things you may want to cover:
 
 -   How to run the test suite
     ./bin/dev を実行
+    URL ＋/letter_opener 　でメール送信確認可能
 
 -   Services (job queues, cache servers, search engines, etc.)
 
@@ -27,8 +28,8 @@ Things you may want to cover:
 
 -   ...
 
--   tailwindcssを読み込ませるまでの流れ
-　　１, node -v # Node.jsのバージョン確認
-　　２,npm -v # npmのバージョン確認
-　　３,sudo npm install -g yarn # yarnインストール
-　　４,yarn add tailwindcss #tailwindcssのインストール
+-   tailwindcss を読み込ませるまでの流れ
+    　　１, node -v # Node.js のバージョン確認
+    　　２,npm -v # npm のバージョン確認
+    　　３,sudo npm install -g yarn # yarn インストール
+    　　４,yarn add tailwindcss #tailwindcss のインストール

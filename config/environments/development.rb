@@ -42,7 +42,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # 追記
-  config.action_mailer.default_url_options = {  host: 'localhost', port: 8000 }
+  # config.action_mailer.default_url_options = {  host: 'localhost', port: 8000 }
+  config.action_mailer.default_url_options = {  host: 'localhost', port: 5000 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
@@ -51,7 +52,11 @@ Rails.application.configure do
     user_name: Rails.application.credentials.dig(:gmail, :email),
     password: Rails.application.credentials.dig(:gmail, :app_password),
     authentication: :login
- }
+  }
+
+  # letter_opener_web導入のため追記
+  config.action_mailer.default_url_options = { host: 'localhost:5000' }
+  config.action_mailer.delivery_method = :letter_opener_web
   # ここまで
 
   # Print deprecation notices to the Rails logger.
