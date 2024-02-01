@@ -65,7 +65,7 @@
                     <h3 class="text-base font-semibold leading-7 text-gray-900">Shop Information</h3>
                     <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Leave your cannabis order to us.</p>
                 </div>
-                <%= form_with url: complete_path, local: true do |form| %>
+                <%= form_with model: @complete_order, url: complete_path, local: true do |form| %>
                 <div class="mt-6 border-t border-gray-100">
                     <dl class="divide-y divide-gray-100">
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -74,18 +74,22 @@
                             <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
                                 <%# TODO: liを繰り返し処理で出力、配列とかで商品情報を格納し、メール本文に反映 %>
                                 <% @selected_products.each do |key, value| %>
-                                    <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
-                                        <div class="flex w-0 flex-1 items-center">
-                                            <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= value["product_name"] %></span>
-                                        </div>
-                                        <div class="flex w-0 flex-1 items-center">
-                                            <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= value["choice"] %></span>
-                                        </div>
-                                    </li>
+                                    <%= form.fields_for :order_products, index: key do |order_form| %>
+                                        <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                            <div class="flex w-0 flex-1 items-center">
+                                                <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= value["product_name"] %></span>
+                                                <%= order_form.hidden_field :product_name, value: value["product_name"] %>
+                                            </div>
+                                            <div class="flex w-0 flex-1 items-center">
+                                                <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= value["choice"] %></span>
+                                                <%= order_form.hidden_field :choice, value: value["choice"] %>
+                                            </div>
+                                        </li>
+                                    <% end %>
                                 <% end %>
                                 <%# 繰り返しここまで %>
-                                <%= form.hidden_field :order_products, value: @selected_products %>
                             </ul>
+                            
                         </dd>
                         <dt class="text-sm font-medium leading-6 text-gray-900 mt-3">Total price</dt>
                         <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -135,7 +139,8 @@
                         <%# TODO: valueに値を持たせる %>
                         <%= form.hidden_field :customer_phone_number, value: @phone_number %>
                     </div>
-                    <div></div>
+                    <div>
+                    </div>
                     </dl>
                     <div class="sm:mx-auto sm:w-full sm:max-w-sm mt-10">
                         <%# TODO: aタグなどにして入力画面に遷移、内容は引き継ぎ %>
