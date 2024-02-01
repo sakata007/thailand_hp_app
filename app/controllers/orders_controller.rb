@@ -55,6 +55,9 @@ class OrdersController < ApplicationController
         @customer_email = complete_order.customer_email        
         @customer_phone_number = complete_order.customer_phone_number        
         @order_products = complete_order.order_products 
+
+        OrderMailer.complete(email: @customer_email).deliver_later
+        render "complete"
     end
 
     private

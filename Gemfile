@@ -70,6 +70,8 @@ group :development do
   # gem "spring"
 
   gem 'htmlbeautifier'
+
+  gem 'letter_opener_web'
 end
 
 group :test do
