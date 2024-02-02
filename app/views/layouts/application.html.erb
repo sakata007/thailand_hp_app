@@ -10,6 +10,17 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
   <body>
+      <% if flash[:notice] %>
+        <div class="flash-success">
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="flash-error">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+
     <%= yield %>
   </body>
 </html>

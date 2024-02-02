@@ -20,8 +20,11 @@ class ProductsController < ApplicationController
     @product.choices = json_array
 
     if @product.save
-      redirect_to top_path
+      flash[:notice] = "Product creation seccess!!."
+      redirect_to top_path, notice: 'Product was successfully created.'
     else 
+      flash[:alert] = 'Product creation failed.'
+      logger.error("Validation failed: #{@product.errors.full_messages.join(', ')}")
       render :create
     end
   end
@@ -29,7 +32,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :summary, :image, :sold_out_flg, choices: {} )
+    params.require(:product).permit(:name, :summary, :image, :sold_out_flg, :fast_shipping_flg,choices: {} )
   end
 
 end

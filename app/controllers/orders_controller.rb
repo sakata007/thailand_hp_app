@@ -15,33 +15,52 @@ class OrdersController < ApplicationController
         @complete_order = CompleteOrder.new
         order = Order.new(confirm_params)
 
-        # 入力された値を変数に代入
-        @name = order.name
-        @address = order.address
-        @date = order.date
-        @email = order.email
-        @phone_number = order.phone_number
-        # 現状、全ての商品情報がハッシュで送られてくる。
-        # TODO: リクエスト前にnilのハッシュを排除
-        all_selects =  order.select
+        @order= Order.new(confirm_params)
 
-        # ハッシュからnilを取り除く処理
-        filtered_hash = all_selects.delete_if{|key, value|
-            value["price"].blank? && value["choice"].blank?
-        }
+   
 
-        @selected_products = filtered_hash
+        # バリデーションが成功した場合の処理
+        if @order.valid?
 
-        # 合計金額を算出する処理
-        @total_price = 0;
-        @selected_products.each do |key, value|
-            price_text = value["price"]
-            # TODO: 最初から数値で取得
-            price = price_text.to_i
-            @total_price = @total_price + price
+            # 入力された値を変数に代入
+            @name = order.name
+            @address = order.address
+            @date = order.date
+            @email = order.email
+            @phone_number = order.phone_number
+            # 現状、全ての商品情報がハッシュで送られてくる。
+            # TODO: リクエスト前にnilのハッシュを排除
+            all_selects =  order.select
+
+            # ハッシュからnilを取り除く処理
+            filtered_hash = all_selects.delete_if{|key, value|
+                value["price"].blank? && value["choice"].blank?
+            }
+
+            @selected_products = filtered_hash
+
+            # 合計金額を算出する処理
+            @total_price = 0;
+            @selected_products.each do |key, value|
+                price_text = value["price"]
+                # TODO: 最初から数値で取得
+                price = price_text.to_i
+                @total_price = @total_price + price
+            end
+
+            render "confirm"
+        else
+            # バリデーションエラーがある場合の処理
+            @products = Product.all
+            @products.each do |product|
+                hash = JSON.parse(product.choices)
+                product.choices = hash
+            end
+
+            render "index"
         end
 
-        render "confirm"
+
     end
 
     def complete        
