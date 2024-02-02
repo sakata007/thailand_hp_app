@@ -186,6 +186,7 @@
 </div>
 <%# TODO: JSを切り分けて保存 %>
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
         // ボタン、メニューを定数定義
         const mobileMenuButton = document.querySelector('#toggleButton');
@@ -193,7 +194,19 @@
 
         // ハンバーガーメニュー押下でメニュー表示切り替え
         mobileMenuButton.addEventListener('click', function () {
-        mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('hidden');
         });
     });
+
+    window.onload = function() {
+        console.log('nul');
+        history.pushState(null, null, null);
+
+        window.addEventListener("popstate", function (e) {
+            history.pushState(null, null, null);
+            console.log('nulnulnul');
+            alert('ブラウザバック検知');
+            return;
+        });
+    };
 </script>

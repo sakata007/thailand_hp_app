@@ -6,17 +6,14 @@ class OrdersController < ApplicationController
 
         # choicesのjsonをハッシュに戻す処理
         @products.each do |product|
-        hash = JSON.parse(product.choices)
-        product.choices = hash
+            hash = JSON.parse(product.choices)
+            product.choices = hash
         end      
     end
 
     def confirm
         @complete_order = CompleteOrder.new
-
         @order= Order.new(confirm_params)
-
-   
 
         # バリデーションが成功した場合の処理
         if @order.valid?
@@ -55,6 +52,9 @@ class OrdersController < ApplicationController
                 hash = JSON.parse(product.choices)
                 product.choices = hash
             end
+
+            # productの選択履歴を保持
+            @history = confirm_params["select"]
 
             render "index"
         end

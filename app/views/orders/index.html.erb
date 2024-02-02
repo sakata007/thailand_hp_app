@@ -97,9 +97,15 @@
                                             <option value="">select choices</option>
                                             <% product.choices.each do |hash| %>
                                                 <% hash.each do |id, value| %>
+                                                    <% choice_text = value["gram"] + "g / " + value["price"] + "baht" %>
                                                     <%# {gram}g/{price}bathの形でoptionのvalueに代入 %>
-                                                    <option value="<%= value["gram"] + "g/" + value["price"] + "baht" %>" class="choices_option">
-                                                        <span class=""><%= value["gram"] %></span>g / <span class="price"><%= value["price"] %></span>baht
+                                                    <option 
+                                                        value="<%= value["gram"] + "g / " + value["price"] + "baht" %>" 
+                                                        class="choices_option"
+                                                        <%# 選択されていた値と一致する場合selectedにする %>
+                                                        <%= 'selected' if @history&.dig(product.id.to_s, "choice") == choice_text %>
+                                                    >
+                                                        <span class=""><%= choice_text %></span>
                                                     </option>
                                                 <% end %><%# /hash.each %>
                                             <% end %><%# /product.choices.each %>
@@ -273,7 +279,7 @@
 
                 // パターンに一致する部分を抽出
                 let matchResult = inputString.match(pattern);
-                console.log(matchResult);
+                // console.log(matchResult);
 
                 // マッチした部分の数値を取り出す
                 if (matchResult && matchResult[1] && matchResult[2]) {
@@ -286,6 +292,19 @@
                 }
             });
         });
-
     });
+
+
+    window.onload = function() {
+        console.log('nul');
+        history.pushState(null, null, null);
+
+        window.addEventListener("popstate", function (e) {
+            history.pushState(null, null, null);
+            console.log('nulnulnul');
+            history.go(1);
+            alert('ブラウザバック検知');
+            return;
+        });
+    };
 </script>
