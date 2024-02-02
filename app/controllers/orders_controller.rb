@@ -65,16 +65,41 @@ class OrdersController < ApplicationController
     def complete        
         complete_order = CompleteOrder.new(complete_params)
 
+        # 注文IDを生成
+        @random_text = "";
+        for i in 1..2
+            text = ('A'..'Z').to_a[rand(26)]
+            @random_text = @random_text + text
+        end
+        
+        @random_num = "";
+        5.times do
+            num = "#{rand(10)}" #1〜9までの数値
+            @random_num = @random_num + num
+        end
+
+        @order_id = @random_text + "-" + @random_num
+        
         # 入力された値を変数に代入
+        @customer_email = complete_order.customer_email        
         @total_price = complete_order.total_price
         @customer_name = complete_order.customer_name
         @customer_shipping_address = complete_order.customer_shipping_address
         @customer_delivery_date_and_time = complete_order.customer_delivery_date_and_time
-        @customer_email = complete_order.customer_email        
         @customer_phone_number = complete_order.customer_phone_number        
         @order_products = complete_order.order_products 
+        
+        OrderMailer.complete(
+            email: @customer_email,
+            total_price: @total_price,
+            customer_name: @customer_name,
+            customer_shipping_address: @customer_shipping_address,
+            customer_delivery_date_and_time: @customer_delivery_date_and_time,
+            customer_phone_number: @customer_phone_number,
+            order_products: @order_products,
+            order_id: @order_id
+        ).deliver_later
 
-        OrderMailer.complete(email: @customer_email).deliver_later
         render "complete"
     end
 
