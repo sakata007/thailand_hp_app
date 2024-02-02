@@ -13,7 +13,6 @@ class OrdersController < ApplicationController
 
     def confirm
         @complete_order = CompleteOrder.new
-        order = Order.new(confirm_params)
 
         @order= Order.new(confirm_params)
 
@@ -23,14 +22,14 @@ class OrdersController < ApplicationController
         if @order.valid?
 
             # 入力された値を変数に代入
-            @name = order.name
-            @address = order.address
-            @date = order.date
-            @email = order.email
-            @phone_number = order.phone_number
+            @name = @order.name
+            @address = @order.address
+            @date = @order.date
+            @email = @order.email
+            @phone_number = @order.phone_number
             # 現状、全ての商品情報がハッシュで送られてくる。
             # TODO: リクエスト前にnilのハッシュを排除
-            all_selects =  order.select
+            all_selects =  @order.select
 
             # ハッシュからnilを取り除く処理
             filtered_hash = all_selects.delete_if{|key, value|
