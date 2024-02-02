@@ -5,9 +5,50 @@
   </head>
   <body>
     <p>Hello</p>
-    <p>We are happy to let you know that we have received your order.</p>
-    <p>Once your package ships, we will send you an email.</p>
-    <p>Click on the link below for ordering details.</p>
-    <p><%= @url %></p>
+    <p>Thank you for choosing our services.</p>
+    <p>We are pleased to inform you that your order has been successfully received. </p>
+    <p>CPlease review the details of your order and your customer information below:</p>
+    <p>---------------------------------------------</p>
+    <h2 style="font-wight: bold;">Order Details</h2>
+    <p>Order ID: <%= @order_id %> </p>
+    <p>Order List:</p>
+    <table>
+      <% @order_products.each do |key, value| %>
+        <tr>
+          <td><%= value["product_name"] %></td>
+          <td>: <%= value["choice"] %></td>
+        </tr>
+      <% end %>
+    </table>
+    <p>Billing amount: <%= @total_price %></p>
+
+    <br>
+
+    <h2 style="font-wight: bold;">Order Details</h2>
+    <p>Full Name: <%= @customer_name %></p>
+    <p>Delivery Address: <%= @customer_shipping_address %></p>
+    <p>Preferred Delivery Time: <%= @customer_delivery_date_and_time %></p>
+    <p>Phone Number: <%= @customer_phone_number %></p>
+
+    <br>
+
+    <h2 style="font-wight: bold;">Bank Transfer Details</h2>
+    <p>Bank Account: XXX Bank, XXX Branch, XXX Account</p>
+    <p>Transfer Amount: <%= @total_price %></p>
+    <p>---------------------------------------------</p>
+    <p>Kindly complete the bank transfer to the above account with the specified amount.</p>
+    <p>We appreciate your prompt payment.</p>
+    <br>
+    <p>For any inquiries related to your order, please feel free to contact us via the following LINE account:</p>
+    <p>LINE ID: taketake</p>
+    <br>
+    <p>If you have any questions or special requests, please don't hesitate to let us know.</p>
+    <p>We look forward to serving you again.</p>
+    <br>
+    <p>Thank you very much.</p>
+    <p>Best regards,</p>
+    <br>
+    <p>XYZ Co., Ltd.</p>
+    <p>Contact: LINE ID: taketake</p>
   </body>
 </html>
