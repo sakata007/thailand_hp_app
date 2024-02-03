@@ -12,25 +12,29 @@ class OrdersController < ApplicationController
     end
 
     def confirm
-        @complete_order = CompleteOrder.new
         @order= Order.new(confirm_params)
+        puts "------"
+        puts @order
+        puts "------"
+        @complete_order = CompleteOrder.new
+
+        # 入力された値を変数に代入
+        @name = @order.name
+        @address = @order.address
+        @date = @order.date
+        @email = @order.email
+        @phone_number = @order.phone_number
 
         # バリデーションが成功した場合の処理
         if @order.valid?
 
-            # 入力された値を変数に代入
-            @name = @order.name
-            @address = @order.address
-            @date = @order.date
-            @email = @order.email
-            @phone_number = @order.phone_number
             # 現状、全ての商品情報がハッシュで送られてくる。
-            # TODO: リクエスト前にnilのハッシュを排除
             all_selects =  @order.select
 
             # ハッシュからnilを取り除く処理
             filtered_hash = all_selects.delete_if{|key, value|
-                value["price"].blank? && value["choice"].blank?
+                # value["price"].blank? && value["choice"].blank?
+                value["choice"].blank?
             }
 
             @selected_products = filtered_hash
@@ -38,9 +42,12 @@ class OrdersController < ApplicationController
             # 合計金額を算出する処理
             @total_price = 0;
             @selected_products.each do |key, value|
-                price_text = value["price"]
-                # TODO: 最初から数値で取得
-                price = price_text.to_i
+                input_choice_string = value["choice"]
+                # 正規表現を使用して数字を取り出す
+                match_data = /\/\s*(\d+)\s*baht/.match(input_choice_string)
+                result = match_data[1]
+
+                price = result.to_i
                 @total_price = @total_price + price
             end
 
@@ -58,8 +65,28 @@ class OrdersController < ApplicationController
 
             render "index"
         end
+    end
 
-
+    def back
+        complete_order = CompleteOrder.new(complete_params)
+        
+        # 入力された値を変数に代入
+        @email = complete_order.customer_email        
+        @name = complete_order.customer_name
+        @address = complete_order.customer_shipping_address
+        @date = complete_order.customer_delivery_date_and_time
+        @phone_number = complete_order.customer_phone_number    
+        
+        @order = Order.new
+        @products = Product.all
+        @products.each do |product|
+            hash = JSON.parse(product.choices)
+            product.choices = hash
+        end
+        
+        @history = complete_order.order_products
+        
+        render "index"
     end
 
     def complete        
