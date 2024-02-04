@@ -11,6 +11,8 @@
     position: fixed;
     z-index: 99;
     width: 100%;
+}
+.bg-rgba-w {
     background-color: rgba(255, 255, 255, 0.85);
 }
 .top-image {
@@ -26,8 +28,8 @@
     }
 }
 
- /* フラッシュ ================================ */
- .flash-success {
+/* フラッシュ ================================ */
+.flash-success {
     padding: 10px 0;
     color: white;
     background: rgb(44, 221, 25);
@@ -38,9 +40,9 @@
     width: 100%;
     border-radius: 0 0 2px 2px;
     font-size: 14px;
-  }
+}
 
-  .flash-error {
+.flash-error {
     padding: 10px 0;
     color: white;
     background: rgb(226, 113, 113);
@@ -51,5 +53,4 @@
     width: 100%;
     border-radius: 0 0 2px 2px;
     font-size: 14px;
-  }
-
+}
