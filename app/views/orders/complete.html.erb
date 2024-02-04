@@ -5,11 +5,85 @@
         <div class="text-center">
             <%# <p class="text-base font-semibold text-indigo-600">404</p> %>
             <h1 class="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Thank you for your purchase.</h1>
-            <p class="mt-6 text-base leading-7 text-gray-600">Sorry, we couldn’t find the page you’re looking for.</p>
+            <%= image_tag "hannah_logo.png", alt: 'src', class: "mx-auto h-10 w-auto mt-6 mb-6" %>
+
+            <p class="text-base leading-7 text-gray-600">An order completion email has been sent to the email address you entered.(<%= @customer_email %>)</p>
+            <p class="text-base leading-7 text-gray-600">We will handle the shipping, so please wait a little while until the product arrives.</p>
+            <p class="text-base leading-7 text-gray-600">Please transfer the payment to the following bank account.</p>
+            <%#  %>
+                <div class="mt-10 border-t border-gray-100">
+                    <dl class="divide-y divide-gray-100">
+                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-gray-900">Thai baht account</dt>
+                        <dd class="mt-2 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <ul role="list" class="divide-y divide-gray-100 rounded-md border border-gray-200">
+                                <%# TODO: liを繰り返し処理で出力、配列とかで商品情報を格納し、メール本文に反映 %>
+                                        <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                            <div class="flex w-0 flex-1 items-center">
+                                                <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Bank name</span>
+                                            </div>
+                                            <div class="flex w-0 flex-1 items-center">
+                                                <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Bangkok bank</span>
+                                            </div>
+                                        </li>
+                                        <li class="flex items-center justify-between py-4 pl-4 pr-5 text-sm leading-6">
+                                            <div class="flex w-0 flex-1 items-center">
+                                                <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">account number</span>
+                                            </div>
+                                            <div class="flex w-0 flex-1 items-center">
+                                                <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">101-9-443249</span>
+                                            </div>
+                                        </li>
+                                <%# 繰り返しここまで %>
+                            </ul>
+                            
+                        </dd>
+                    </div>
+                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-gray-900">Billing amount</dt>
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                            <p><%= @total_price %>baht</p>
+                            <p class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">*Shipping will be borne by the customer.</p>
+                        </dd>
+                        <%# TODO: valueに値を持たせる %>
+                    </div>
+
+                    <div></div>
+                    </dl>
+                </div>
+            <%#  %>
             <div class="mt-10 flex items-center justify-center gap-x-6">
-            <a href="#" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Go back home</a>
+            <%= link_to 'Go back home', top_path, class: "rounded-md bg-lime-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600" %>
             <a href="#" class="text-sm font-semibold text-gray-900">Contact support <span aria-hidden="true">&rarr;</span></a>
             </div>
         </div>
     </main>
 </div>
+<%# TODO: JSを切り分けて保存 %>
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // ボタン、メニューを定数定義
+        const mobileMenuButton = document.querySelector('#toggleButton');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // ハンバーガーメニュー押下でメニュー表示切り替え
+        mobileMenuButton.addEventListener('click', function () {
+            mobileMenu.classList.toggle('hidden');
+        });
+    });
+
+    window.onload = function() {
+        console.log('nul');
+        history.pushState(null, null, null);
+
+        window.addEventListener("popstate", function (e) {
+            history.pushState(null, null, null);
+            console.log('nulnulnul');
+            alert('Do not use your back button.The input information will be reset.');
+            return;
+        });
+
+    };
+
+</script>
