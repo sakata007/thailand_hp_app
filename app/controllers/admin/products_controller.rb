@@ -24,20 +24,92 @@ class Admin::ProductsController < ApplicationController
         
         # ハッシュをjsonに変換
         input_hash = @product.choices
+
         json_array = input_hash.map.with_index do |(key, value), index|
         {index+1  => { "gram" => value["gram"], "price" => value["price"] }}
         end.to_json  
+
+        puts "-----"
+        puts "createのjson_arrayです"
+        puts json_array
+        puts "-----"
         
         @product.choices = json_array
 
+
         if @product.save
         flash[:notice] = "Product creation seccess!!."
-        redirect_to top_path, notice: 'Product was successfully created.'
+        redirect_to admin_products_path, notice: 'Product was successfully created.'
         else 
         flash[:alert] = 'Product creation failed.'
         logger.error("Validation failed: #{@product.errors.full_messages.join(', ')}")
         render :create
         end
+    end
+
+    def edit
+        @product = Product.find(params[:id])
+
+        # ハッシュをjsonに変換
+        # puts "ハッシュ"
+        @product.choices = JSON.parse(@product.choices)
+        # puts @product.choices
+        puts "-----"
+        puts "choices"
+        puts 
+        puts @product.choices
+        puts "-----"
+        # json_array = input_hash.map.with_index do |(key, value), index|
+        # {index+1  => { "gram" => value["gram"], "price" => value["price"] }}
+        # end.to_json  
+        
+    end
+
+    def update
+        @product = Product.find(params[:id])
+        
+        # ハッシュをjsonに変換
+        input_hash = product_params["choices"]
+
+        
+        json_array = input_hash.to_h.map.with_index do |(key, value), index|
+            puts "-----"
+            puts "key"
+            puts key
+            puts value
+            puts "-----"
+            {key.to_i  => { "gram" => value["gram"], "price" => value["price"] }}
+        end.to_json  
+
+        puts "-----"
+        puts "updateのjson_arrayです"
+        puts json_array
+        puts "-----"
+        
+        # @product.choices = json_array
+        # puts "-----"
+        # puts "json"
+        # puts @product.choices
+        # puts "-----"
+
+        if @product.update(product_params) && @product.update(choices: json_array)
+                # puts "---成功---"
+                # puts @product.choices
+                # puts "---choices変更---"
+                # @product.update(choices: json_array)
+                # puts @product.choices
+                # puts "-----"
+                flash[:notice] = "Product creation seccess!!."
+                redirect_to admin_products_path, notice: 'Product was successfully created.'
+        else 
+            flash[:alert] = 'Product creation failed.'
+            logger.error("Validation failed: #{@product.errors.full_messages.join(', ')}")
+            render :edit
+        end
+    end
+
+    def destroy
+
     end
 
     private
