@@ -27,6 +27,13 @@
         object-fit: cover;
     }
 }
+#thumbnail {
+    height: 200px;
+    max-width: 200px;
+    margin: 10px;
+    border: solid thin lightgray;
+    border-radius: 5px;
+}
 
 /* フラッシュ ================================ */
 .flash-success {

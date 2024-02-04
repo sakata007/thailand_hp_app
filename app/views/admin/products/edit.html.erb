@@ -30,12 +30,18 @@
                 </div>
                 <div class="sm:col-span-2">
                     <%= form.label :image, "Product image", class: "block text-sm font-semibold leading-6 text-gray-900"%>
+                    <p class="block text-sm font-semibold leading-6 text-gray-400">(There is no need to select an image if you do not want to change it.)</p>
                     <div class="mt-2.5">
-                        <%= form.file_field :image, class: "block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
+                        <%= form.file_field :image, 
+                            id: "upload_file",
+                            class: "block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600
                             file:bg-gray-50 file:border-0
                             file:bg-gray-100 file:me-4
                             file:py-3 file:px-4
-                            dark:file:bg-gray-700 dark:file:text-gray-400" %>
+                            dark:file:bg-gray-700 dark:file:text-gray-400"%>
+                        <div class="panel-body">
+                            <%= image_tag @product.image.present? ? @product.image : "no_image.png", id: "thumbnail" %>
+                        </div>
                     </div>
                 </div>
 
@@ -150,4 +156,36 @@
 
         index += 1;
     }
+
+        window.onload = function() {
+        (function() {
+            var print_img_id = 'print_img';
+            if (checkFileApi()) {
+                var file_image = document.getElementById('file-image');
+                file_image.addEventListener('change', selectReadfile, false);
+            }
+            function checkFileApi() {
+                if (window.File && window.FileReader && window.FileList && window.Blob) {
+                    return true;
+                }
+                alert('このブラウザはFile APIに対応していないため利用できません');
+                return false;
+            }
+            function selectReadfile(e) {
+                var file = e.target.files;
+                var reader = new FileReader();
+                reader.readAsDataURL(file[0]);
+                reader.onload = function() {
+                    readImage(reader, print_img_id);
+                }
+            }
+            function readImage(reader, print_image_id) {
+                var result_DataURL = reader.result;
+                var img = document.getElementById(print_image_id);
+                var src = document.createAttribute('src');
+                src.value = result_DataURL;
+                img.setAttributeNode(src);
+            }
+        })();
+    }    
 </script>
