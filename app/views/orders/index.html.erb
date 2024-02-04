@@ -1,59 +1,8 @@
 <%# TODO: フラッシュメッセージ %>
-<div class="min-h-full">
-    <nav class="fixed">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center">
-                    <%# ロゴ %>
-                    <div class="flex-shrink-0">
-                        <%# TODO: サイトロゴを動的に設定 %>
-                        <%# <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"> %>
-                        LOGO
-                    </div>
-                    <%# ナビゲーション（PC） %>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                        <!-- ナビゲーション -->
-                        <%# <a href="#" class="text-gray-300 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a> %>
-                        <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Top</a>
-                        <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</a>
-                        <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Place an Order</a>
-                        <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                </div>
-                <div class="-mr-2 flex md:hidden">
-                    <!-- Mobile menu button -->
-                    <button type="button" id="toggleButton" class="relative inline-flex items-center justify-center rounded-md bg-lime-800 p-2 text-lime-400 hover:bg-lime-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-lime-800" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="absolute -inset-0.5"></span>
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                        <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ハンバーガー展開後 -->
-        <div class="hidden" id="mobile-menu">
-            <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                <a href="#" class="bg-lime-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
-                <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Top</a>
-                <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Products</a>
-                <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Place an order</a>
-                <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Shop</a>
-            </div>
-        </div>
-    </nav>
+<div class="min-h-full" id="menu1">
+    <%= render partial: 'layouts/header' %>
 
     <%= form_with model: @order, url: confirm_path, local: true, class: "form_with" do |form| %>
-
     <div>
         <%= image_tag "taima.png", alt: 'src', class: "top-image" %>
     </div>
@@ -61,13 +10,17 @@
     <main>
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <%# メインコンテンツ %>
-            <div class="bg-white">
+            <div class="bg-white" id="menu2">
                 <%# TODO: productが存在する条件文 %>
                 <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-18 lg:max-w-7xl lg:px-8">
                     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                        <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
+                        <%= image_tag "hannah_logo.png", alt: 'src', class: "mx-auto h-10 w-auto" %>
                         <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-lime-900">Products</h2>
                     </div>
+                    <%# <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+                        <p>Please select the purchase option for the product you wish to purchase.</p>
+                        <p>Please note that reloading the page will reset your selection information.</p>
+                    </div> %>
 
                     <%= render 'layouts/top_error_message', model: form.object %>
 
@@ -135,11 +88,11 @@
             </div><%# メインコンテンツここまで %>
             
             <%# オーダー情報 %>
-            <div class="mx-auto max-w-2xl px-4 py-4 sm:px-3 sm:py-18 lg:max-w-7xl lg:px-8">
+            <div class="mx-auto max-w-2xl px-4 py-4 sm:px-3 sm:py-18 lg:max-w-7xl lg:px-8" id="menu3">
                 <div class="flex min-h-full flex-col justify-center pt-6 mb-12 py-12 lg:px-8">
                     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                        <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company">
-                        <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-lime-900">Place an order</h2>
+                        <%= image_tag "hannah_logo.png", alt: 'src', class: "mx-auto h-10 w-auto" %>
+                        <h2 class="mt-3 text-center text-2xl font-bold leading-9 tracking-tight text-lime-900">Place an order</h2>
                     </div>
 
                     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -202,7 +155,7 @@
 
 
             <%# 店舗情報 %>
-            <div class="bg-gray-200 mx-auto max-w-2xl mt-8 px-4 py-16 sm:px-6 sm:py-18 lg:max-w-7xl lg:px-8">
+            <div class="bg-gray-200 mx-auto max-w-2xl mt-8 px-4 py-16 sm:px-6 sm:py-18 lg:max-w-7xl lg:px-8" id="menu4">
                 <div class="px-4 sm:px-0">
                     <h3 class="text-base font-semibold leading-7 text-gray-900">Shop Information</h3>
                     <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">Leave your cannabis order to us.</p>
@@ -323,16 +276,16 @@
 
 
     window.onload = function() {
-        console.log('nul');
-        history.pushState(null, null, null);
+        // console.log('nul');
+        // history.pushState(null, null, null);
 
-        window.addEventListener("popstate", function (e) {
-            history.pushState(null, null, null);
-            console.log('nulnulnul');
-            history.go(1);
-            alert('ブラウザバック検知');
-            return;
-        });
+        // window.addEventListener("popstate", function (e) {
+        //     history.pushState(null, null, null);
+        //     console.log('nulnulnul');
+        //     history.go(1);
+        //     alert('Do not use your back button.The input information will be reset.');
+        //     return;
+        // });
 
         document.querySelectorAll('.choices_select').forEach(function(select) {
             select.addEventListener('DOMContentLoaded', function() {
@@ -364,4 +317,20 @@
 
     };
 
+    const smoothScrollTrigger = document.querySelectorAll('a[href^="#"]');
+        for (let i = 0; i < smoothScrollTrigger.length; i++){
+            smoothScrollTrigger[i].addEventListener('click', (e) => {
+                e.preventDefault();
+                let href = smoothScrollTrigger[i].getAttribute('href');
+                let targetElement = document.getElementById(href.replace('#', ''));
+                const rect = targetElement.getBoundingClientRect().top;
+                const offset = window.pageYOffset;
+                const gap = 60;
+                const target = rect + offset - gap;
+                window.scrollTo({
+                    top: target,
+                    behavior: 'smooth',
+                });
+            });
+        }
 </script>
