@@ -1,56 +1,7 @@
 <%# TODO: エラーメッセージ、フラッシュメッセージ、バリデーション、JSON関連 %>
 <div class="min-h-full">
-    <nav class="fixed">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center">
-                    <%# ロゴ %>
-                    <div class="flex-shrink-0">
-                        <%# TODO: サイトロゴを動的に設定 %>
-                        <%# <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"> %>
-                        LOGO
-                    </div>
-                    <%# ナビゲーション（PC） %>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                        <!-- ナビゲーション -->
-                        <%# <a href="#" class="text-gray-300 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a> %>
-                        <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Product list</a>
-                        <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Product registration</a>
-                        <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Store infomation</a>
-                        <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Site settings</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                </div>
-                <div class="-mr-2 flex md:hidden">
-                    <!-- Mobile menu button -->
-                    <button type="button" id="toggleButton" class="relative inline-flex items-center justify-center rounded-md bg-lime-800 p-2 text-lime-400 hover:bg-lime-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-lime-800" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="absolute -inset-0.5"></span>
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                        <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+    <%= render partial: 'layouts/admin/header' %>
 
-        <!-- ハンバーガー展開後 -->
-        <div class="hidden" id="mobile-menu">
-            <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                <a href="#" class="bg-lime-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
-                <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Product list</a>
-                <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Product registration</a>
-                <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Store infomation</a>
-                <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Site settings</a>
-            </div>
-        </div>
-    </nav>
 
     <div class="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
         <div class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" aria-hidden="true">
@@ -59,7 +10,7 @@
             <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Product registration</h2>
             <p class="mt-2 text-lg leading-8 text-gray-600">AYou can register products to sell online.</p>
         </div>
-        <%= form_with model: @product , url: store_product_path, local: true, class: "mx-auto mt-16 max-w-xl sm:mt-20" do |form| %>
+        <%= form_with model: @product , url: admin_products_path, local: true, class: "mx-auto mt-16 max-w-xl sm:mt-20" do |form| %>
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                 <div>
                     <%= form.label :name, "Product name", class: "block text-sm font-semibold leading-6 text-gray-900"%>
