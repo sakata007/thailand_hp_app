@@ -1,9 +1,8 @@
-<% if model.errors.any? %>
-
+<% if model.errors.full_messages_for(field_name.to_sym).any? %>
   <div class="alert alert-warning">
     <ul>
-      <% model.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% model.errors.full_messages_for(field_name.to_sym).each do |message| %>
+        <li><span class="text-sm text-red-600"><%= message %></span></li>
       <% end %>
     </ul>
   </div>
