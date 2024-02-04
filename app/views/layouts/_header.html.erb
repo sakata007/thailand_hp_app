@@ -1,0 +1,63 @@
+<nav class="fixed">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+            <div class="flex items-center">
+                <%# ロゴ %>
+                <a href="/" class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <%# TODO: 動的に画像挿入 %>
+                        <%= image_tag "hannah_logo.png", alt: 'src', class: "mx-auto h-10 w-auto" %>
+                    </div>
+                    <div class="pl-1">
+                        <p><span class="text-lime-900 font-bold">hannah</span></p>
+                    </div>
+                </a>
+                <%# ナビゲーション（PC） %>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                    <!-- ナビゲーション -->
+                    <%# ページ内スクロールがうまくいかないので一旦if文で分岐 %>
+                    <% if request.fullpath == "/"%>
+                    <%# <a href="#" class="text-gray-300 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a> %>
+                        <a href="#menu1" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Top</a>
+                        <a href="#menu2" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</a>
+                        <a href="#menu3" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Place an Order</a>
+                        <a href="#menu4" class="text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Shop</a>
+                    <% else %>
+                        <%= link_to 'Top', top_path(anchor: 'menu1'), class: 'text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
+                        <%= link_to 'Products', top_path(anchor: 'menu2'), class: 'text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
+                        <%= link_to 'Place an Order', top_path(anchor: 'menu3'), class: 'text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
+                        <%= link_to 'Shop', top_path(anchor: 'menu4'), class: 'text-lime-700 hover:bg-lime-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium' %>
+                    <% end %>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden md:block">
+            </div>
+            <div class="-mr-2 flex md:hidden">
+                <!-- Mobile menu button -->
+                <button type="button" id="toggleButton" class="relative inline-flex items-center justify-center rounded-md bg-lime-800 p-2 text-lime-400 hover:bg-lime-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-lime-800" aria-controls="mobile-menu" aria-expanded="false">
+                    <span class="absolute -inset-0.5"></span>
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                    <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ハンバーガー展開後 -->
+    <div class="hidden" id="mobile-menu">
+        <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+            <a href="#" class="bg-lime-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
+            <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Top</a>
+            <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Products</a>
+            <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Place an order</a>
+            <a href="#" class="text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Shop</a>
+        </div>
+    </div>
+</nav>
