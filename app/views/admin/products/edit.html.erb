@@ -49,12 +49,10 @@
                     <p class="block text-sm font-semibold leading-6 text-gray-900">Purchase options</p>
                     <%# 追加ボタンクリックによりadded-blockが増える（indexの値は1足された状態） %>
                     <div id="form-container">
-                                <% @product.choices.each do |hash| %>
-                        <div class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                <%# 元々product.choices.eachここ %>
-                                    <% hash.each do |id, value| %>
-                            <%= form.fields_for :choices, index: id do |choices_form| %>
-
+                        <% @product.choices.each do |hash| %>
+                            <div class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <% hash.each do |id, value| %>
+                                    <%= form.fields_for :choices, index: id do |choices_form| %>
                                         <div class="flex justify-between">
                                             <div class="w-1/3">
                                                 <%= choices_form.label :gram, "grams", class: "block text-sm font-semibold leading-6 text-gray-900"%>
@@ -74,11 +72,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                            <% end %><%# /fields_for %>
-                                    <% end %><%# /hash.each %>
-                                <%# 元々product.choices.eachここ %>
-                        </div><%# /added-block %>
-                                <% end %><%# /product.choices.each %>
+                                    <% end %><%# /fields_for %>
+                                <% end %><%# /hash.each %>
+                            </div><%# /added-block %>
+                        <% end %><%# /product.choices.each %>
                     </div>
                     <%# TODO: JSでボタンを押下した時にフォームを増やす %>
                     <button type="button" onclick="addForm()" class="js-add-option block rounded-md bg-lime-600 mt-2 sm:mt-1.5  px-3.5 py-1.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">＋ Increase purchasing options</button>
@@ -108,6 +105,12 @@
             <button type="submit" class="block w-full rounded-md bg-lime-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600">Register your product</button>
             </div>
         <% end %>
+        <div class="mx-auto max-w-xl mt-10 flex items-center justify-start gap-x-6">
+            <%= link_to admin_products_path, class: "text-sm font-semibold text-gray-900" do %>
+                <span aria-hidden="true">&larr;</span>Back to product list
+            <% end %>
+        </div>
+        </div>
     </div>
 </div>
 <script>
