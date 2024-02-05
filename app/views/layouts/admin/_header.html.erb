@@ -3,7 +3,7 @@
         <div class="flex h-16 items-center justify-between">
             <div class="flex items-center">
                 <%# ロゴ %>
-                <a href="/" class="flex items-center">
+                <%= link_to admin_products_path, class: "flex items-center" do%>
                     <div class="flex-shrink-0">
                         <%# TODO: 動的に画像挿入 %>
                         <%= image_tag "hannah_logo.png", alt: 'src', class: "mx-auto h-10 w-auto" %>
@@ -11,7 +11,7 @@
                     <div class="pl-1">
                         <p><span class="text-white font-bold">hannah</span></p>
                     </div>
-                </a>
+                <% end %>
                 <%# ナビゲーション（PC） %>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
@@ -24,6 +24,9 @@
                 </div>
             </div>
             <div class="hidden md:block">
+                <%= link_to top_path, target: :_blank, rel: "noopener noreferrer", class: 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium' do %>
+                    View sales site<span class="text-white hover:bg-white hover:text-black" aria-hidden="true">&rarr;</span>
+                <% end %>
             </div>
             <div class="-mr-2 flex md:hidden">
                 <!-- Mobile menu button -->
@@ -44,10 +47,11 @@
     <!-- ハンバーガー展開後 -->
     <div class="hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-            <%= link_to 'Product list', top_path, class: 'text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium' %>
-            <%= link_to 'Product registration', top_path, class: 'text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium' %>
-            <%= link_to 'Store infomation', top_path, class: 'text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium' %>
-            <%= link_to 'Site settings', top_path, class: 'text-lime-700 hover:bg-lime-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium' %>
+            <%= link_to 'Product list', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
+            <%= link_to 'Product registration', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
+            <%= link_to 'Store infomation', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
+            <%= link_to 'Site settings', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
+            <%= link_to 'View sales site', top_path, target: :_blank, rel: "noopener noreferrer", class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
         </div>
     </div>
 </nav>

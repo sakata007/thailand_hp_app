@@ -122,10 +122,16 @@
                         <%= form.hidden_field :customer_shipping_address, value:@address %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                        <dt class="text-sm font-medium leading-6 text-gray-900">Delivery date and time</dt>
-                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @date %></dd>
+                        <dt class="text-sm font-medium leading-6 text-gray-900">Delivery date</dt>
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @delivery_date %></dd>
                         <%# TODO: valueに値を持たせる %>
-                        <%= form.hidden_field :customer_delivery_date_and_time, value:@date %>
+                        <%= form.hidden_field :customer_delivery_date, value:@delivery_date %>
+                    </div>
+                    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                        <dt class="text-sm font-medium leading-6 text-gray-900">Delivery time</dt>
+                        <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @delivery_time %></dd>
+                        <%# TODO: valueに値を持たせる %>
+                        <%= form.hidden_field :customer_delivery_time, value:@delivery_time %>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                         <dt class="text-sm font-medium leading-6 text-gray-900">Your Email</dt>
@@ -158,7 +164,8 @@
                         <% end %>
                         <%= form.hidden_field :customer_name, value:@name %>
                         <%= form.hidden_field :customer_shipping_address, value:@address %>
-                        <%= form.hidden_field :customer_delivery_date_and_time, value:@date %>
+                        <%= form.hidden_field :customer_delivery_date, value:@delivery_date %>
+                        <%= form.hidden_field :customer_delivery_time, value:@delivery_time %>
                         <%= form.hidden_field :customer_email, value:@email %>
                         <%= form.hidden_field :customer_phone_number, value: @phone_number %>
                         <%= form.submit "Correct input contents", class: "flex w-full justify-center rounded-md bg-gray-400 mt-6 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600" %>
@@ -169,33 +176,8 @@
     </main>
     
     <%# フッター %>
-    <nav>
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center">
-                    <%# ロゴ %>
-                    <div class="flex-shrink-0">
-                        <%# <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"> %>
-                        LOGO
-                    </div>
-                    <%# ナビゲーション（PC） %>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <!-- ナビゲーション -->
-                        <%# <a href="#" class="text-gray-300 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a> %>
-                        <%# <a href="#" class="text-gray-700 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Top</a>
-                        <a href="#" class="text-gray-700 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</a>
-                        <a href="#" class="text-gray-700 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Place an Order</a>
-                        <a href="#" class="text-gray-700 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Shop</a> %>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                </div>
-            </div>
-        </div>
-    </nav>
+    <%= render partial: 'layouts/footer' %>
+
 </div>
 <%# TODO: JSを切り分けて保存 %>
 <script>
