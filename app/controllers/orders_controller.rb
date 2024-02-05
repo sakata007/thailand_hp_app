@@ -13,15 +13,13 @@ class OrdersController < ApplicationController
 
     def confirm
         @order= Order.new(confirm_params)
-        puts "------"
-        puts @order
-        puts "------"
         @complete_order = CompleteOrder.new
 
         # 入力された値を変数に代入
         @name = @order.name
         @address = @order.address
-        @date = @order.date
+        @delivery_date = @order.delivery_date
+        @delivery_time = @order.delivery_time
         @email = @order.email
         @phone_number = @order.phone_number
 
@@ -74,7 +72,8 @@ class OrdersController < ApplicationController
         @email = complete_order.customer_email        
         @name = complete_order.customer_name
         @address = complete_order.customer_shipping_address
-        @date = complete_order.customer_delivery_date_and_time
+        @delivery_date = complete_order.customer_delivery_date
+        @delivery_time = complete_order.customer_delivery_time
         @phone_number = complete_order.customer_phone_number    
         
         @order = Order.new
@@ -112,7 +111,8 @@ class OrdersController < ApplicationController
         @total_price = complete_order.total_price
         @customer_name = complete_order.customer_name
         @customer_shipping_address = complete_order.customer_shipping_address
-        @customer_delivery_date_and_time = complete_order.customer_delivery_date_and_time
+        @customer_delivery_date = complete_order.customer_delivery_date
+        @customer_delivery_time = complete_order.customer_delivery_time
         @customer_phone_number = complete_order.customer_phone_number        
         @order_products = complete_order.order_products 
         
@@ -121,7 +121,8 @@ class OrdersController < ApplicationController
             total_price: @total_price,
             customer_name: @customer_name,
             customer_shipping_address: @customer_shipping_address,
-            customer_delivery_date_and_time: @customer_delivery_date_and_time,
+            customer_delivery_date: @customer_delivery_date,
+            customer_delivery_time: @customer_delivery_time,
             customer_phone_number: @customer_phone_number,
             order_products: @order_products,
             order_id: @order_id
@@ -133,11 +134,11 @@ class OrdersController < ApplicationController
     private
 
     def confirm_params
-        params.require(:order).permit(:name, :address, :date, :email, :phone_number, select: {})
+        params.require(:order).permit(:name, :address, :delivery_date, :delivery_time, :email, :phone_number, select: {})
     end
 
     def complete_params
-        params.require(:complete_order).permit(:total_price, :customer_name, :customer_shipping_address, :customer_delivery_date_and_time, :customer_email, :customer_phone_number, order_products: {})
+        params.require(:complete_order).permit(:total_price, :customer_name, :customer_shipping_address, :customer_delivery_date, :customer_delivery_time , :customer_email, :customer_phone_number, order_products: {})
     end
 
 end
