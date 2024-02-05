@@ -22,28 +22,33 @@ class Admin::ProductsController < ApplicationController
     def create
         @product = Product.new(product_params)
         
-        # ハッシュをjsonに変換
+        # 入力された値（ハッシュ形式）を変数に代入
         input_hash = @product.choices
 
-        json_array = input_hash.map.with_index do |(key, value), index|
-        {index+1  => { "gram" => value["gram"], "price" => value["price"] }}
-        end.to_json  
-
-        puts "-----"
-        puts "createのjson_arrayです"
-        puts json_array
-        puts "-----"
+        # 空の入力値を除く処理
+        i = 1;
+        hash_array = {};
+        input_hash.each do |key, value|
+            if !value["gram"].blank? && !value["price"].blank?
+                hash_array[i] = { "gram" => value["gram"], "price" => value["price"] }
+                i = i + 1
+            end
+        end 
+        
+        # 空の文字列を除いたハッシュをjson形式に変換
+        json_array = hash_array.map.with_index do |(key, value), j|
+        {j+1  => { "gram" => value["gram"], "price" => value["price"] }}
+        end.to_json 
         
         @product.choices = json_array
 
-
         if @product.save
-        flash[:notice] = "Product creation seccess!!."
-        redirect_to admin_products_path, notice: 'Product was successfully created.'
+            flash[:notice] = "Product creation seccess!!."
+            redirect_to admin_products_path, notice: 'Product was successfully created.'
         else 
-        flash[:alert] = 'Product creation failed.'
-        logger.error("Validation failed: #{@product.errors.full_messages.join(', ')}")
-        render :create
+            flash[:alert] = 'Product creation failed.'
+            logger.error("Validation failed: #{@product.errors.full_messages.join(', ')}")
+            render :create
         end
     end
 
@@ -55,7 +60,7 @@ class Admin::ProductsController < ApplicationController
         @product.choices = JSON.parse(@product.choices)
         # puts @product.choices
         puts "-----"
-        puts "choices"
+        puts "editでのproduct.choices"
         puts 
         puts @product.choices
         puts "-----"
