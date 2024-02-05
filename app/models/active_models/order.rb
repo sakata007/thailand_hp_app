@@ -11,23 +11,16 @@ class Order
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
     validates :email, presence: true, length: { maximum: 320 },
                       format: { with: VALID_EMAIL_REGEX }
-    # validate :validate_select_items
-
-    # private
-
-    # def validate_select_items
-
-      # puts '---ここが商品バリデーション-----'
-      # puts choices
-      # puts '--------'
-
-      # if choices.present? 
-      #   errors.add(:base, "Please select at least one item")
-      # end
-
-    end
+    validate :validate_select_you #商品選択
 
 
+    private
+
+    def validate_select_you
+      if select.present? && select.values.all? { |value| value["price"].blank? && value["choice"].blank? }
+        errors.add(:you, "must select one or more products.")
+      end
+    end 
 
 end
   
