@@ -43,7 +43,7 @@ class Admin::ProductsController < ApplicationController
         else 
         flash[:alert] = 'Product creation failed.'
         logger.error("Validation failed: #{@product.errors.full_messages.join(', ')}")
-        render :create
+        render :new
         end
     end
 

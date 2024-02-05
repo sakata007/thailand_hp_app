@@ -12,13 +12,19 @@ class Order
     validates :email, presence: true, length: { maximum: 320 },
                       format: { with: VALID_EMAIL_REGEX }
     validate :validate_select_items
-  
+
     private
-  
+
     def validate_select_items
-      if select.present? && select.values.all? { |value| value["price"].blank? && value["choice"].blank? }
+
+      # puts '---ここが商品バリデーション-----'
+      # puts choices
+      # puts '--------'
+
+      if choices.present? 
         errors.add(:base, "Please select at least one item")
       end
+
     end
 
 

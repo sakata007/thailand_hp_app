@@ -27,6 +27,8 @@
                     <%# TODO: selectのメッセージが出てない %>
                     <%= render partial: 'layouts/error_messages', locals: { model: form.object, field_name: 'select'} %>
 
+                    <%= render partial: 'layouts/error_messages', locals: { model: form.object, field_name: 'select_items'} %>
+
                     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                         <%# 商品カード(DB)  %>
                         <% @products.each do |product| %>
