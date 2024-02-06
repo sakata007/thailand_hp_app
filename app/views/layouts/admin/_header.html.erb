@@ -16,10 +16,10 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                     <!-- ナビゲーション -->
-                        <%= link_to 'Product list', top_path, class: 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium' %>
-                        <%= link_to 'Product registration', top_path, class: 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium' %>
-                        <%= link_to 'Store infomation', top_path, class: 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium' %>
-                        <%= link_to 'Site settings', top_path, class: 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium' %>
+                        <%= link_to 'Product list', admin_products_path, class: 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium' %>
+                        <%= link_to 'Product registration', new_admin_product_path, class: 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium' %>
+                        <%#= link_to 'Store infomation', top_path, class: 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium' %>
+                        <%#= link_to 'Site settings', top_path, class: 'text-white hover:bg-white hover:text-black rounded-md px-3 py-2 text-sm font-medium' %>
                     </div>
                 </div>
             </div>
@@ -47,10 +47,10 @@
     <!-- ハンバーガー展開後 -->
     <div class="hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-            <%= link_to 'Product list', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
-            <%= link_to 'Product registration', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
-            <%= link_to 'Store infomation', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
-            <%= link_to 'Site settings', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
+            <%= link_to 'Product list', admin_products_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
+            <%= link_to 'Product registration', new_admin_product_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
+            <%#= link_to 'Store infomation', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
+            <%#= link_to 'Site settings', top_path, class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
             <%= link_to 'View sales site', top_path, target: :_blank, rel: "noopener noreferrer", class: 'text-white hover:bg-white hover:text-black block rounded-md px-3 py-2 text-base font-medium' %>
         </div>
     </div>
