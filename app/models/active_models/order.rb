@@ -2,7 +2,17 @@ class Order
     include ActiveModel::Model
     include ActiveModel::Attributes
     
-    attr_accessor :name, :address, :date, :email, :phone_number, :select
+    attr_accessor :name, :address, :delivery_date, :delivery_time, :email, :phone_number, :select
+
+    DELIVERY_TIME = [
+        '10:00~12:00',
+        '12:00~14:00',
+        '14:00~16:00',
+        '16:00~18:00',
+        '18:00~20:00',
+        '20:00~22:00',
+        '22:00~23:00'
+    ]
 
     # MEMO:オーダー関連のバリデーションはここに記載  
     #オーダー画面（index）

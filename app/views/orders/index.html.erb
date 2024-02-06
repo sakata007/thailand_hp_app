@@ -17,10 +17,6 @@
                         <%= image_tag "hannah_logo.png", alt: 'src', class: "mx-auto h-10 w-auto" %>
                         <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-lime-900">Products</h2>
                     </div>
-                    <%# <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-                        <p>Please select the purchase option for the product you wish to purchase.</p>
-                        <p>Please note that reloading the page will reset your selection information.</p>
-                    </div> %>
 
                     <%= render 'layouts/top_error_message', model: form.object %>
 
@@ -119,11 +115,30 @@
                         </div>
 
                         <div class="mt-4">
-                            <%= form.label :date, "Desired delivery date and time", class: "block text-sm font-medium leading-6 text-gray-900" %>
-                            <div class="mt-1">
-                                <%= form.datetime_field :date, 
-                                value: (@date if @date.present?),
-                                class: "block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+                            <%= form.label :delivery_date, "Desired delivery date", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                            <p class="block text-sm font-medium leading-6 text-gray-500">・You can select from 2 hours at the earliest.</p>
+                            <p class="block text-sm font-medium leading-6 text-gray-500">・Please select a date within one week.</p>
+                            <p class="block text-sm font-medium leading-6 text-gray-500">・Please note that delivery time may vary depending on delivery status and inventory status.</p>
+                            <div class="mt-1 block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <%= form.select :delivery_date, 
+                                    [ ["Today : #{Date.today}", Date.today],["Tomorrow : #{Date.today + 1.days}", Date.today + 1.days],["2 days later : #{Date.today + 2.days}", Date.today + 2.days],], 
+                                    # ここを引き継ぎたい
+                                    { selected: @delivery_date }, 
+                                    { id: "order_date", class: "w-full" }
+                                    %>
+                                <%= render partial: 'layouts/error_messages', locals: { model: form.object, field_name: 'date'} %>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <%= form.label :delivery_time, "Desired delivery time", class: "block text-sm font-medium leading-6 text-gray-900" %>
+                            <div class="mt-1 block w-full rounded-md border-0 px-1.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <% available_times = Order::DELIVERY_TIME.select { |time| Time.now + 2.hours <= Time.parse(time.split('~')[0]) } %>
+                                <%= form.select :delivery_time, 
+                                available_times, 
+                                { selected: @delivery_time }, 
+                                { id:"order_time", class: "w-full" } 
+                                %>
                                 <%= render partial: 'layouts/error_messages', locals: { model: form.object, field_name: 'date'} %>
                             </div>
                         </div>
@@ -205,35 +220,9 @@
 
     <% end %><%# /form_with %>
 
-    
     <%# フッター %>
-    <nav>
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center">
-                    <%# ロゴ %>
-                    <div class="flex-shrink-0">
-                        <%# <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"> %>
-                        LOGO
-                    </div>
-                    <%# ナビゲーション（PC） %>
-                    <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <!-- ナビゲーション -->
-                        <%# <a href="#" class="text-gray-300 rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a> %>
-                        <a href="#" class="text-gray-700 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Top</a>
-                        <a href="#" class="text-gray-700 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</a>
-                        <a href="#" class="text-gray-700 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Place an Order</a>
-                        <a href="#" class="text-gray-700 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Shop</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden md:block">
-                </div>
-            </div>
-        </div>
-    </nav>
+    <%= render partial: 'layouts/footer' %>
+
 </div>
 <%# TODO: JSを切り分けて保存 %>
 <script>
@@ -278,17 +267,6 @@
 
 
     window.onload = function() {
-        // console.log('nul');
-        // history.pushState(null, null, null);
-
-        // window.addEventListener("popstate", function (e) {
-        //     history.pushState(null, null, null);
-        //     console.log('nulnulnul');
-        //     history.go(1);
-        //     alert('Do not use your back button.The input information will be reset.');
-        //     return;
-        // });
-
         document.querySelectorAll('.choices_select').forEach(function(select) {
             select.addEventListener('DOMContentLoaded', function() {
                 console.log('リロードにより発火')
@@ -335,4 +313,59 @@
                 });
             });
         }
+    
+    // 日付選択と時刻に関する記述
+    document.addEventListener('DOMContentLoaded', function () {
+        const dateSelect = document.getElementById('order_date'); // 実際のdateセレクトボックスのIDに変更してください
+
+        const timeSelect = document.getElementById('order_time'); // 実際のtimeセレクトボックスのIDに変更してください
+
+        dateSelect.addEventListener('change', function () {
+            const selectedDate = new Date(dateSelect.value);
+            const today = new Date();
+
+            if (selectedDate.setHours(0, 0, 0, 0) === today.setHours(0, 0, 0, 0)) {
+                // パターンA: Todayが選択された場合
+                console.log("todayパターン");
+                const now = new Date();
+                now.setHours(now.getHours() + 2); // 現在時刻の2時間後
+
+                // MEMO: せめてrailsで定義した定数を持ってくる
+                const availableTimes = [
+                    '10:00~12:00',
+                    '12:00~14:00',
+                    '14:00~16:00',
+                    '16:00~18:00',
+                    '18:00~20:00',
+                    '20:00~22:00',
+                    '22:00~23:00'
+                ];
+
+                // 一度選択肢をクリア
+                timeSelect.innerHTML = '';
+
+                // 現在時刻の2時間後以降の選択肢を生成
+                for (let i = 0; i < availableTimes.length; i++) {
+                    const startTime = availableTimes[i].split('~')[0];
+                    if (now.getHours() <= parseInt(startTime.split(':')[0])) {
+                    const option = document.createElement('option');
+                    option.value = availableTimes[i];
+                    option.text = availableTimes[i];
+                    timeSelect.add(option);
+                    }
+                }
+            } else {
+                // パターンB: Today以外が選択された場合
+                timeSelect.innerHTML = `
+                                    <option value="10:00~12:00">10:00~12:00</option>
+                                    <option value="12:00~14:00">12:00~14:00</option>
+                                    <option value="14:00~16:00">14:00~16:00</option>
+                                    <option value="16:00~18:00">16:00~18:00</option>
+                                    <option value="18:00~20:00">18:00~20:00</option>
+                                    <option value="20:00~22:00">20:00~22:00</option>
+                                    <option value="22:00~23:00">22:00~23:00</option>
+                                    `;
+            }
+        });
+    });
 </script>
