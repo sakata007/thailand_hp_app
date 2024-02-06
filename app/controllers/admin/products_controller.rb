@@ -43,12 +43,12 @@ class Admin::ProductsController < ApplicationController
         @product.choices = json_array
 
         if @product.save
-            flash[:notice] = "Product creation seccess!!."
-            redirect_to admin_products_path, notice: 'Product was successfully created.'
+        flash[:notice] = "Product creation seccess!!."
+        redirect_to admin_products_path, notice: 'Product was successfully created.'
         else 
-            flash[:alert] = 'Product creation failed.'
-            logger.error("Validation failed: #{@product.errors.full_messages.join(', ')}")
-            render :create
+        flash[:alert] = 'Product creation failed.'
+        logger.error("Validation failed: #{@product.errors.full_messages.join(', ')}")
+        render :new
         end
     end
 
