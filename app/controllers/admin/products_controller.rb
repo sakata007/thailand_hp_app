@@ -114,7 +114,13 @@ class Admin::ProductsController < ApplicationController
     end
 
     def destroy
-
+        # puts '------'
+        # puts 'destroy'
+        # puts '------'
+        @product = Product.find(params[:id])
+        @product.destroy
+        flash[:notice] = "Deletion completed"
+        redirect_to admin_products_path
     end
 
     private
