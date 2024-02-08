@@ -21,7 +21,7 @@
                 <div>
                     <%= form.label :name, "Product name", class: "block text-sm font-semibold leading-6 text-gray-900"%>
                     <div class="mt-2.5">
-                        <%= form.text_field :name, placeholder: "Amnesia", class: "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+                        <%= form.text_field :name, placeholder: "Amnesia", required: true, class: "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
                         <%= render partial: 'layouts/error_messages', locals: { model: form.object, field_name: 'name'} %>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="sm:col-span-2">
                     <%= form.label :summary, "Product overview", class: "block text-sm font-semibold leading-6 text-gray-900"%>
                     <div class="mt-2.5">
-                    <%= form.text_area :summary, placeholder: "Sativa dominant / THC18% / Enagetic / Sweet flavor", class: "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+                    <%= form.text_area :summary, placeholder: "Sativa dominant / THC18% / Enagetic / Sweet flavor",required: true, class: "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
                     <%= render partial: 'layouts/error_messages', locals: { model: form.object, field_name: 'summary'} %>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                                     <div class="w-1/3">
                                         <%= choices_form.label :gram, "grams", class: "block text-sm font-semibold leading-6 text-gray-900"%>
                                         <div class="mt-2.5 flex">
-                                            <%= choices_form.number_field :gram, placeholder: "3", class: "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+                                            <%= choices_form.number_field :gram, placeholder: "3", required: true,  class: "block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
                                             <p class="inline-block w-1/3 text-center pt-4">g</p>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
                                     <div class="w-1/2">
                                         <%= choices_form.label :price, "price", class: "block text-sm font-semibold leading-6 text-gray-900"%>
                                         <div class="mt-2.5 flex">
-                                            <%= choices_form.number_field :price, placeholder: "1500", class: "block  w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
+                                            <%= choices_form.number_field :price, placeholder: "1500", required: true, class: "block  w-2/3 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" %>
                                             <p class="inline-block w-1/3 text-center pt-4">baht</p>
                                         </div>
                                     </div>
