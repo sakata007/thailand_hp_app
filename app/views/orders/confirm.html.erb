@@ -79,8 +79,8 @@
                                                 <%= order_form.hidden_field :product_name, value: value["product_name"] %>
                                             </div>
                                             <div class="flex w-0 flex-1 items-center">
-                                                <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= value["choice"] %></span>
-                                                <%= order_form.hidden_field :choice, value: value["choice"] %>
+                                                <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%=  number_with_delimiter(value["choice"]) %></span>
+                                                <%= order_form.hidden_field :choice, value: number_with_delimiter(value["choice"]) %>
                                             </div>
                                         </li>
                                     <% end %>
@@ -98,9 +98,9 @@
                                         <span class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">Billing amount</span>
                                     </div>
                                     <div class="flex w-0 flex-1 items-center">
-                                        <span class="font-bold mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= @total_price %>baht</span>
+                                        <span class="font-bold mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"><%= number_with_delimiter(@total_price) %>baht</span>
                                         <%# TODO: valueに値を持たせる %>
-                                        <%= form.hidden_field :total_price, value: @total_price %>
+                                        <%= form.hidden_field :total_price, value: number_with_delimiter(@total_price) %>
                                     </div>
                                 </li>
                                 <%# ここまで %>

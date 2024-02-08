@@ -42,8 +42,9 @@ class OrdersController < ApplicationController
             @selected_products.each do |key, value|
                 input_choice_string = value["choice"]
                 # 正規表現を使用して数字を取り出す
-                match_data = /\/\s*(\d+)\s*baht/.match(input_choice_string)
-                result = match_data[1]
+                match_data = /\/\s*([\d,]+)\s*baht/.match(input_choice_string)
+            
+                result = match_data[1].gsub(',', '')
 
                 price = result.to_i
                 @total_price = @total_price + price
