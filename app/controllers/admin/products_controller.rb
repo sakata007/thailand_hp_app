@@ -13,9 +13,6 @@ class Admin::ProductsController < ApplicationController
     end
 
     def new
-        puts "------"
-        puts "newです"
-        puts "------"
         @product = Product.new
     end
 
@@ -54,20 +51,7 @@ class Admin::ProductsController < ApplicationController
 
     def edit
         @product = Product.find(params[:id])
-
-        # ハッシュをjsonに変換
-        # puts "ハッシュ"
         @product.choices = JSON.parse(@product.choices)
-        # puts @product.choices
-        puts "-----"
-        puts "editでのproduct.choices"
-        puts 
-        puts @product.choices
-        puts "-----"
-        # json_array = input_hash.map.with_index do |(key, value), index|
-        # {index+1  => { "gram" => value["gram"], "price" => value["price"] }}
-        # end.to_json  
-        
     end
 
     def update
@@ -75,35 +59,12 @@ class Admin::ProductsController < ApplicationController
         
         # ハッシュをjsonに変換
         input_hash = product_params["choices"]
-
         
         json_array = input_hash.to_h.map.with_index do |(key, value), index|
-            puts "-----"
-            puts "key"
-            puts key
-            puts value
-            puts "-----"
             {key.to_i  => { "gram" => value["gram"], "price" => value["price"] }}
         end.to_json  
 
-        puts "-----"
-        puts "updateのjson_arrayです"
-        puts json_array
-        puts "-----"
-        
-        # @product.choices = json_array
-        # puts "-----"
-        # puts "json"
-        # puts @product.choices
-        # puts "-----"
-
         if @product.update(product_params) && @product.update(choices: json_array)
-                # puts "---成功---"
-                # puts @product.choices
-                # puts "---choices変更---"
-                # @product.update(choices: json_array)
-                # puts @product.choices
-                # puts "-----"
                 flash[:notice] = "Product creation seccess!!."
                 redirect_to admin_products_path, notice: 'Product was successfully update.'
         else 
@@ -114,9 +75,6 @@ class Admin::ProductsController < ApplicationController
     end
 
     def destroy
-        # puts '------'
-        # puts 'destroy'
-        # puts '------'
         @product = Product.find(params[:id])
         @product.destroy
         flash[:notice] = "Deletion completed"
