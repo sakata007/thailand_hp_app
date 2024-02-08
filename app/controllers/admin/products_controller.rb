@@ -105,7 +105,7 @@ class Admin::ProductsController < ApplicationController
                 # puts @product.choices
                 # puts "-----"
                 flash[:notice] = "Product creation seccess!!."
-                redirect_to admin_products_path, notice: 'Product was successfully created.'
+                redirect_to admin_products_path, notice: 'Product was successfully update.'
         else 
             flash[:alert] = 'Product creation failed.'
             logger.error("Validation failed: #{@product.errors.full_messages.join(', ')}")

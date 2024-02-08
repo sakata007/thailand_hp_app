@@ -7,7 +7,6 @@ class Product < ApplicationRecord
     # 管理画面＿新規登録
     validates :name, presence:true
     validates :summary, presence:true  
-    validate :validate_flag
     # validate :validate_choices
 
     # その他のモデル定義...
@@ -18,12 +17,7 @@ class Product < ApplicationRecord
 
     # 管理画面＿問い合わせ先設定画面（導入後）
 
-    private
-    def validate_flag
-        if fast_shipping_flg && sold_out_flg
-          errors.add(:flag, " must be selected only.")
-        end
-    end
+
 
 #  gramとpriceでnullを弾きたい （未実装）
     # def validate_choices
