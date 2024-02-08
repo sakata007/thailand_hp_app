@@ -39,7 +39,7 @@
 .flash-success {
     padding: 10px 0;
     color: white;
-    background: rgb(44, 221, 25);
+    background: rgb(101 163 13);
     text-align: center;
     position: absolute;
     top: 64px;
@@ -53,6 +53,19 @@
     padding: 10px 0;
     color: white;
     background: rgb(226, 113, 113);
+    text-align: center;
+    position: absolute;
+    top: 64px;
+    z-index: 1;
+    width: 100%;
+    border-radius: 0 0 2px 2px;
+    font-size: 14px;
+}
+
+.flash-error {
+    padding: 10px 0;
+    color: white;
+    background: lime-600;
     text-align: center;
     position: absolute;
     top: 64px;

@@ -169,7 +169,7 @@
     function removeForm() {
         const formContainer = document.getElementById('form-container');
         // 子要素があるかどうかを確認し、最後のフォームを削除する
-        if (formContainer.children.length > 0) {
+        if (formContainer.children.length > 1) {
             formContainer.removeChild(formContainer.lastChild);
         }
     }
