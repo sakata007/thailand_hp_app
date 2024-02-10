@@ -55,10 +55,10 @@
                                                 <option value="">select choices</option>
                                                 <% product.choices.each do |hash| %>
                                                     <% hash.each do |id, value| %>
-                                                        <% choice_text = value["gram"] + "g / " + value["price"] + "baht" %>
+                                                        <% choice_text = value["gram"] + "g / " + number_with_delimiter(value["price"]) + "baht" %>
                                                         <%# {gram}g/{price}bathの形でoptionのvalueに代入 %>
                                                         <option 
-                                                            value="<%= value["gram"] + "g / " + value["price"] + "baht" %>" 
+                                                            value="<%= value["gram"] + "g / " + number_with_delimiter(value["price"]) + "baht" %>" 
                                                             class="choices_option"
                                                             <%# 選択されていた値と一致する場合selectedにする %>
                                                             <%= 'selected' if @history&.dig(product.id.to_s, "choice") == choice_text %>
