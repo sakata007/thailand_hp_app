@@ -22,7 +22,7 @@
                                 <%= link_to edit_admin_product_path(product.id) do %>
                                     <input value="<%= product.name %>" autocomplete="off" type="hidden" name="order[select][<%= product.id %>][product_name]" id="_order_29_product_name">
                                     <div class="relative aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
-                                        <%= image_tag(product.image.present? ? product.image : "taima.png", alt: '', class: "aspect-square h-full w-full object-cover object-center lg:h-full lg:w-full") %>
+                                        <%= image_tag(product.image.present? ? product.image : "no_image.jpg", alt: '', class: "aspect-square h-full w-full object-cover object-center lg:h-full lg:w-full") %>
                                         <% if product.sold_out_flg %>
                                             <p class="absolute bottom-0 mb-2 block w-full rounded-md bg-red-600 px-3.5 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600">sold out</p>
                                         <% elsif product.fast_shipping_flg %>
