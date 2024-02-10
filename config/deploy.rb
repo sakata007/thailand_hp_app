@@ -1,57 +1,37 @@
-# config valid only for current version of Capistrano
-lock "3.7.0"
+# Capistranoのバージョンを指定（初期から記入済み）
+lock '3.7.0'
 
-set :application, "thailand_hp_app"
-set :repo_url, "git@example.com:sakata007/thailand_hp_app.git"
+# アプリケーションの指定
+set :application, 'thailand_hp_lp'
+set :repo_url,  'git@github.com:sakata007/thailand_hp_lp.git'
 
-# Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+# sharedディレクトリに入れるファイルを指定
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, "/var/www/my_app_name"
+# SSH接続設定
+set :ssh_options, {
+  auth_methods: ['publickey'], 
+  keys: ['~/.ssh/id_rsa_hannah'] 
+}
 
-# Default value for :format is :airbrussh.
-# set :format, :airbrussh
+# 保存しておく世代の設定
+set :keep_releases, 5
 
-# You can configure the Airbrussh format using :format_options.
-# These are the defaults.
-# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
+# rbenvの設定
+set :rbenv_type, :user
+set :rbenv_ruby, '3.3.0'
 
-# Default value for :pty is false
-# set :pty, true
+# ここからUnicornの設定
+# Unicornのプロセスの指定
+set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 
-# Default value for :linked_files is []
-# append :linked_files, "config/database.yml", "config/secrets.yml"
+# Unicornの設定ファイルの指定
+set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 
-# Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for keep_releases is 5
-# set :keep_releases, 5
-
+# Unicornを再起動するための記述
+after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
-    desc "Make sure local git is in sync with remote."
-    task :confirm do
-        on roles(:app) do
-        puts "This stage is '#{fetch(:stage)}'. Deploying branch is '#{fetch(:branch)}'."
-        puts 'Are you sure? [y/n]'
-        ask :answer, 'n'
-        if fetch(:answer) != 'y'
-            puts 'deploy stopped'
-            exit
-        end
-        end
-    end
-
-    desc 'Initial Deploy'
-    task :initial do
-        on roles(:app) do
-        invoke 'deploy'
-        end
-    end
-
-    before :starting, :confirm
+  task :restart do
+    invoke 'unicorn:restart'
+  end
 end
