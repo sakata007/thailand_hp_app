@@ -72,6 +72,13 @@ group :development do
   gem 'htmlbeautifier'
 
   gem 'letter_opener_web'
+
+  # デプロイのため追加
+  gem 'capistrano', '3.7.0'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rbenv-vars'
 end
 
 group :test do
