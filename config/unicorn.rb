@@ -3,8 +3,8 @@ worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
  timeout 15
  preload_app true
  
- listen '/var/www/｛app_name｝/tmp/unicorn.sock'
- pid    '/var/www/｛app_name｝/tmp/unicorn.pid'
+ listen '/var/www/thailand_hp_app/tmp/unicorn.sock'
+ pid    '/var/www/thailand_hp_app/tmp/unicorn.pid'
  
  before_fork do |server, worker|
    Signal.trap 'TERM' do
