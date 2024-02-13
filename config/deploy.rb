@@ -5,6 +5,9 @@ lock '3.7.0'
 set :application, 'thailand_hp_app'
 set :repo_url,  'git@github.com:fight-kento/thailand_hp_app.git'
 
+# ブランチをmainブランチに変更
+set :branch, "main"
+
 # sharedディレクトリに入れるファイルを指定
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
