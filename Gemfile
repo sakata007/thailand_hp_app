@@ -74,7 +74,7 @@ group :development do
   gem 'letter_opener_web'
 
   # デプロイのため追加
-  gem 'capistrano', '3.7.0'
+  gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'capistrano-rbenv'
