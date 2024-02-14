@@ -14,7 +14,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bund
 # SSH接続設定
 set :ssh_options, {
   auth_methods: ['publickey'], 
-  keys: ['~/.ssh/id_rsa_hannah.pem'] 
+  keys: ['~/.ssh/id_rsa_hannah'] 
 }
 
 # 保存しておく世代の設定
