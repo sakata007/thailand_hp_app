@@ -1,5 +1,5 @@
 # Capistranoのバージョンを指定（初期から記入済み）
-lock '3.7.0'
+lock '3.18.0'
 
 # アプリケーションの指定
 set :application, 'thailand_hp_app'
