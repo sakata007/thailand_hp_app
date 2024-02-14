@@ -192,17 +192,9 @@ GEM
       net-protocol
     net-ssh (7.2.1)
     nio4r (2.7.0)
-    nokogiri (1.16.2-aarch64-linux)
-      racc (~> 1.4)
     nokogiri (1.16.2-arm-linux)
       racc (~> 1.4)
-    nokogiri (1.16.2-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.2-x86-linux)
-      racc (~> 1.4)
     nokogiri (1.16.2-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     psych (5.1.2)
       stringio
@@ -256,17 +248,11 @@ GEM
     rexml (3.2.6)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    sass-embedded (1.70.0-aarch64-linux-gnu)
-      google-protobuf (~> 3.25)
     sass-embedded (1.70.0-arm-linux-gnueabihf)
       google-protobuf (~> 3.25)
-    sass-embedded (1.70.0-arm64-darwin)
-      google-protobuf (~> 3.25)
-    sass-embedded (1.70.0-x86-linux-gnu)
+    sass-embedded (1.70.0-arm-linux-musleabihf)
       google-protobuf (~> 3.25)
     sass-embedded (1.70.0-x86_64-darwin)
-      google-protobuf (~> 3.25)
-    sass-embedded (1.70.0-x86_64-linux-gnu)
       google-protobuf (~> 3.25)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -320,12 +306,10 @@ GEM
     zeitwerk (2.6.13)
 
 PLATFORMS
-  aarch64-linux
   arm-linux
-  arm64-darwin
-  x86-linux
-  x86_64-darwin
-  x86_64-linux
+  arm-linux-gnueabihf
+  arm-linux-musleabihf
+  x86_64-darwin-21
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
