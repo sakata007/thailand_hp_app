@@ -3,10 +3,10 @@ source "https://rubygems.org"
 ruby "3.3.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.3"
+gem "rails", "7.1.3"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+gem "sprockets-rails", "3.4.2"
 
 # Use sqlite3 as the database for Active Record
 # gem "sqlite3", "~> 1.4"
@@ -16,16 +16,16 @@ gem "mysql2"
 gem "puma", ">= 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+gem "importmap-rails", "2.0.1"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
+gem "turbo-rails", "2.0.2"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
+gem "stimulus-rails", "1.3.3"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
+gem "jbuilder", "2.11.5"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -46,13 +46,13 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # .envで設定できるように導入
-gem "dotenv-rails"
+gem "dotenv-rails", "3.0.0"
 
 # sassを使用可能にするため導入
 gem "sassc-rails"
 
 # Tailwind CSS利用のため導入
-gem 'cssbundling-rails'
+gem 'cssbundling-rails', "1.4.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -91,6 +91,26 @@ group :test do
 end
 
 
-gem "dartsass-rails", "~> 0.5.0"
+gem "dartsass-rails", "0.5.0"
 
 gem "mini_magick"
+
+# 本番バージョンエラーのため追記
+gem "actioncable", "7.1.3"
+gem "actionmailbox", "7.1.3"
+gem "actionmailer", "7.1.3"
+gem "actionpack", "7.1.3"
+gem "actiontext", "7.1.3"
+gem "actionview", "7.1.3"
+gem "activejob", "7.1.3"
+gem "activemodel", "7.1.3"
+gem "activerecord", "7.1.3"
+gem "activestorage", "7.1.3"
+gem "activesupport", "7.1.3"
+gem "railties", "7.1.3"
+gem "sass-embedded" , "1.70.0"
+gem "rails-dom-testing" , "2.2.0"
+gem "globalid" , "1.2.1"
+gem "bigdecimal" , "3.1.6"
+gem "ffi" , "1.16.3"
+gem "google-protobuf" , "3.25.2"
