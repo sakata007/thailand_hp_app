@@ -8,6 +8,8 @@ set :repo_url,  'git@github.com:fight-kento/thailand_hp_app.git'
 # ブランチをmainブランチに変更
 set :branch, "main"
 
+set :deploy_to, '/var/www/thailand_hp_app'
+
 # sharedディレクトリに入れるファイルを指定
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
