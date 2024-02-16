@@ -49,7 +49,7 @@ gem "bootsnap", require: false
 gem "dotenv-rails", "3.0.0"
 
 # sassを使用可能にするため導入
-gem "sassc-rails"
+gem "sassc-rails", "2.1.2"
 
 # Tailwind CSS利用のため導入
 gem 'cssbundling-rails', "1.4.0"
