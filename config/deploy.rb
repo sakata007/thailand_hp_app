@@ -10,7 +10,7 @@ set :branch, "main"
 
 set :deploy_to, '/var/www/thailand_hp_app'
 
-set :linked_files, %w{config/credentials/production.key}
+set :linked_files, %w{config/master.key}
 
 # sharedディレクトリに入れるファイルを指定
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
