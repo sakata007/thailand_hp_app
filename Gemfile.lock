@@ -317,20 +317,8 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  actioncable (= 7.1.3)
-  actionmailbox (= 7.1.3)
-  actionmailer (= 7.1.3)
-  actionpack (= 7.1.3)
-  actiontext (= 7.1.3)
-  actionview (= 7.1.3)
-  activejob (= 7.1.3)
-  activemodel (= 7.1.3)
-  activerecord (= 7.1.3)
-  activestorage (= 7.1.3)
-  activesupport (= 7.1.3)
   bcrypt (~> 3.1.7)
   bcrypt_pbkdf
-  bigdecimal (= 3.1.6)
   bootsnap
   capistrano
   capistrano-bundler
@@ -344,9 +332,6 @@ DEPENDENCIES
   debug
   dotenv-rails (= 3.0.0)
   ed25519
-  ffi (= 1.16.3)
-  globalid (= 1.2.1)
-  google-protobuf (= 3.25.2)
   htmlbeautifier
   importmap-rails (= 2.0.1)
   jbuilder (= 2.11.5)
@@ -355,9 +340,6 @@ DEPENDENCIES
   mysql2
   puma (>= 5.0)
   rails (= 7.1.3)
-  rails-dom-testing (= 2.2.0)
-  railties (= 7.1.3)
-  sass-embedded (= 1.70.0)
   sassc-rails (= 2.1.2)
   selenium-webdriver
   sprockets-rails (= 3.4.2)
