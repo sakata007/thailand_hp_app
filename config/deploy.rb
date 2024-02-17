@@ -16,7 +16,8 @@ set :deploy_to, '/var/www/thailand_hp_app'
 
 # sharedディレクトリに入れるファイルを指定
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
-set :linked_files, %w(config/master.key), '.env'
+set :linked_files, %w(config/master.key)
+append :linked_files, '.env'
 
 # SSH接続設定
 set :ssh_options, {
