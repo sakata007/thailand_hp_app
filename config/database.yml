@@ -5,9 +5,9 @@ default: &default
 
 production:
     <<: *default
-    database: blog_development
-    username: <%= ENV['DB_USERNAME']%>
-    password: <%= ENV['DB_PASSWORD']%>
+    database: hannah_production
+    username: <%= fetch(:db_username) %>
+    password: <%= fetch(:db_password) %>
     socket: /var/lib/mysql/mysql.sock
 
 development:

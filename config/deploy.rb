@@ -1,6 +1,10 @@
 # Capistranoのバージョンを指定（初期から記入済み）
 lock '3.18.0'
 
+# DB設定
+set :db_username, ENV['DB_USERNAME']
+set :db_password, ENV['DB_PASSWORD']
+
 # アプリケーションの指定
 set :application, 'thailand_hp_app'
 set :repo_url,  'git@github.com:sakata007/thailand_hp_app.git'
@@ -39,5 +43,21 @@ after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
+  end
+
+  desc 'Create database'
+  task :db_create do
+    on roles(:db) do |host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+                  # データベース作成のsqlセット
+                # データベース名はdatabase.ymlに設定した名前で
+                  sql = "CREATE DATABASE IF NOT EXISTS hannah_production;"
+                  # クエリの実行。
+                # userとpasswordはmysqlの設定に合わせて
+                execute "mysql --user=ENV['DB_USERNAME'] --password=ENV['DB_PASSWORD'] -e '#{sql}'"
+        end
+      end
+    end
   end
 end
