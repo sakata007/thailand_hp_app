@@ -3,7 +3,7 @@ lock '3.18.0'
 
 # アプリケーションの指定
 set :application, 'thailand_hp_app'
-set :repo_url,  'git@github.com:fight-kento/thailand_hp_app.git'
+set :repo_url,  'git@github.com:sakata007/thailand_hp_app.git'
 
 # ブランチをmainブランチに変更
 set :branch, "main"
