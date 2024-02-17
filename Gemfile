@@ -94,23 +94,3 @@ end
 gem "dartsass-rails", "0.5.0"
 
 gem "mini_magick"
-
-# 本番バージョンエラーのため追記
-gem "actioncable", "7.1.3"
-gem "actionmailbox", "7.1.3"
-gem "actionmailer", "7.1.3"
-gem "actionpack", "7.1.3"
-gem "actiontext", "7.1.3"
-gem "actionview", "7.1.3"
-gem "activejob", "7.1.3"
-gem "activemodel", "7.1.3"
-gem "activerecord", "7.1.3"
-gem "activestorage", "7.1.3"
-gem "activesupport", "7.1.3"
-gem "railties", "7.1.3"
-gem "sass-embedded" , "1.70.0"
-gem "rails-dom-testing" , "2.2.0"
-gem "globalid" , "1.2.1"
-gem "bigdecimal" , "3.1.6"
-gem "ffi" , "1.16.3"
-gem "google-protobuf" , "3.25.2"
