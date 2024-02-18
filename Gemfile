@@ -98,3 +98,5 @@ gem "mini_magick"
 gem "unicorn-rails"
 
 gem "unicorn"
+
+gem 'rack'
