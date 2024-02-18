@@ -84,6 +84,10 @@ group :development do
   gem 'bcrypt_pbkdf'
 end
 
+group :production, :staging do
+  gem 'unicorn'
+end
+
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
