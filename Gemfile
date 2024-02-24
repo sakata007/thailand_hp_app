@@ -98,3 +98,4 @@ end
 gem "dartsass-rails", "0.5.0"
 
 gem "mini_magick"
+gem "tailwindcss-rails", "~> 2.3"
