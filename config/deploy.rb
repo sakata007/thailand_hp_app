@@ -5,6 +5,9 @@ lock '3.18.0'
 set :db_username, ENV['DB_USERNAME']
 set :db_password, ENV['DB_PASSWORD']
 
+# 環境を設定（追記）
+set :default_env, { 'RAILS_ENV' => 'production' }
+
 # アプリケーションの指定
 set :application, 'thailand_hp_app'
 set :repo_url,  'git@github.com:sakata007/thailand_hp_app.git'
