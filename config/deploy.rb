@@ -2,6 +2,7 @@ lock "3.18.0"
 
 set :application, "thailand_hp_app"
 set :repo_url, "git@github.com:sakata007/thailand_hp_app.git"
+set :branch, "main"
 
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
