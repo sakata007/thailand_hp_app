@@ -79,7 +79,7 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rbenv'
   gem 'capistrano-rbenv-vars'
-  gem 'capistrano3-unicorn'
+  # gem 'capistrano3-unicorn'
   gem 'ed25519'
   gem 'bcrypt_pbkdf'
 end
