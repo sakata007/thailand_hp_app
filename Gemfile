@@ -75,11 +75,12 @@ group :development do
 
   # デプロイのため追加
   gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
+  gem 'capistrano-safe-deploy-to'
   gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'capistrano-rbenv-vars'
-  # gem 'capistrano3-unicorn'
+  gem 'capistrano3-puma'
   gem 'ed25519'
   gem 'bcrypt_pbkdf'
 end
