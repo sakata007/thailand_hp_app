@@ -79,8 +79,7 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano-rbenv-vars'
-  gem 'capistrano3-puma'
+  gem 'capistrano3-puma', require: false
   gem 'ed25519'
   gem 'bcrypt_pbkdf'
 end
