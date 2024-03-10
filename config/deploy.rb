@@ -1,31 +1,27 @@
+# config valid for current version and patch releases of Capistrano
 lock "3.18.0"
 
+# アプリ名
 set :application, "thailand_hp_app"
-set :repo_url, "git@github.com:sakata007/thailand_hp_app.git"
-set :branch, "main"
 
-namespace :deploy do
-  desc "Make sure local git is in sync with remote."
-  task :confirm do
-    on roles(:app) do
-      puts "This stage is '#{fetch(:stage)}'. Deploying branch is '#{fetch(:branch)}'."
-      puts 'Are you sure? [y/n]'
-      ask :answer, 'n'
-      if fetch(:answer) != 'y'
-        puts 'deploy stopped'
-        exit
-      end
-    end
-  end
+# GitHubリポジトリ情報
+set :repo_url, "git@github.sakata007/thailand_hp_app.git"
 
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      invoke 'deploy'
-    end
-  end
+# ユーザーはdeployにする
+set :user, "deploy"
 
-  before :starting, :confirm
-end
+# rbenvをユーザーレベルでインストール
+set :rbenv_type, :user
 
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+# rubyのバージョンを指定
+set :rbenv_ruby, File.read('.ruby-version').strip
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+
+# 並列数
+set :bundle_jobs, 2
+
+# リリース間で共有するリソースのファイルパスを書く
+append :linked_files, "config/master.key"
+
+# 各リリースが共通で読み込むディレクトリを設定する
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",  '.bundle'
