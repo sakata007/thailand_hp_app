@@ -13,7 +13,7 @@ gem "sprockets-rails", "3.4.2"
 gem "mysql2"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+gem 'puma', '~> 3.4'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails", "2.0.1"
@@ -79,7 +79,7 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano3-puma', require: false
+  gem 'capistrano3-puma', '~> 3.1', '>= 3.1.1'
   gem 'ed25519'
   gem 'bcrypt_pbkdf'
 end

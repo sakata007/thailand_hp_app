@@ -5,7 +5,7 @@ lock "3.18.0"
 set :application, "thailand_hp_app"
 
 # GitHubリポジトリ情報
-set :repo_url, "git@github.sakata007/thailand_hp_app.git"
+set :repo_url, "git@github.com:sakata007/thailand_hp_app.git"
 
 # ユーザーはdeployにする
 set :user, "deploy"
@@ -23,5 +23,9 @@ set :bundle_jobs, 2
 # リリース間で共有するリソースのファイルパスを書く
 append :linked_files, "config/master.key"
 
+set :pty, true
+
 # 各リリースが共通で読み込むディレクトリを設定する
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",  '.bundle'
+
+set :branch, 'main'
