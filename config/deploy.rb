@@ -29,3 +29,6 @@ set :pty, true
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",  '.bundle'
 
 set :branch, 'main'
+
+# tailwind対策のため追記
+after 'deploy:updated', 'deploy:compile_assets'
