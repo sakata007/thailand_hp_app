@@ -1,4 +1,4 @@
-server "hannah.delivery", user: "deploy", roles: %w{app db web}
+server "133.167.41.245", user: "deploy", roles: %w{app db web}
 
 set :ssh_options, {
   user: fetch(:user),
