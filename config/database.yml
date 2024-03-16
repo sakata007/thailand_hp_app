@@ -6,8 +6,9 @@ default: &default
 production:
     <<: *default
     database: hannah_production
-    username: <%= Rails.application.credentials.db[:USERNAME] %>
-    password: <%= Rails.application.credentials.db[:PASSWORD] %>
+    # 環境変数で読み込む
+    username: <%= ENV['DB_USERNAME'] %>
+    password: <%= ENV['DB_PASSWORD'] %>
     socket: /var/lib/mysql/mysql.sock
 
 development:

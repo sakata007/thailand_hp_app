@@ -28,6 +28,7 @@ set :pty, true
 # 各リリースが共通で読み込むディレクトリを設定する
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",  '.bundle'
 
+# branchをmainブランチに設定
 set :branch, 'main'
 
 # tailwind対策のため追記
