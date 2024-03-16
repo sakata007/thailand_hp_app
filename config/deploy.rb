@@ -33,3 +33,16 @@ set :branch, 'main'
 
 # tailwind対策のため追記
 after 'deploy:updated', 'deploy:compile_assets'
+
+# RACK_ENVに関する設定を追記
+namespace :deploy do
+  desc 'Set environment variables'
+  task :set_environment_variables do
+    on roles(:app) do
+      execute :echo, "'export RACK_ENV=production' >> ~/.bashrc"
+      # 他の環境変数も同様に設定
+    end
+  end
+end
+
+before 'deploy:starting', 'deploy:set_environment_variables'
