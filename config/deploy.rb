@@ -1,48 +1,49 @@
-# config valid for current version and patch releases of Capistrano
+# Capistranoのバージョンを指定（初期から記入済み）
 lock "3.18.0"
 
-# アプリ名
-set :application, "thailand_hp_app"
+# アプリケーションの指定
+set :application, 'thailand_hp_app'
+set :repo_url,  'git@github.com:sakata007/thailand_hp_app.git'
 
-# GitHubリポジトリ情報
-set :repo_url, "git@github.com:sakata007/thailand_hp_app.git"
+# sharedディレクトリに入れるファイルを指定
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
-# ユーザーはdeployにする
+# SSH接続設定
+set :ssh_options, {
+  auth_methods: ['publickey'], 
+  keys: ['~/.ssh/id_rsa_hannah.pub'] 
+}
+
+# 保存しておく世代の設定
+set :keep_releases, 5
+
+# ユーザーはdeployにする(追記)
 set :user, "deploy"
 
-# rbenvをユーザーレベルでインストール
+# rbenvの設定
 set :rbenv_type, :user
+set :rbenv_ruby, '3.3.0'
 
-# rubyのバージョンを指定
-set :rbenv_ruby, File.read('.ruby-version').strip
-set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-
-# 並列数
-set :bundle_jobs, 2
-
-# リリース間で共有するリソースのファイルパスを書く
+# リリース間で共有するリソースのファイルパスを書く(追記)
 append :linked_files, "config/master.key"
 
-set :pty, true
-
-# 各リリースが共通で読み込むディレクトリを設定する
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets",  '.bundle'
-
-# branchをmainブランチに設定
+# branchをmainブランチに設定（追記）
 set :branch, 'main'
 
-# tailwind対策のため追記
+# tailwind対策のため（追記）
 after 'deploy:updated', 'deploy:compile_assets'
 
-# RACK_ENVに関する設定を追記
+# ここからUnicornの設定
+# Unicornのプロセスの指定
+set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
+
+# Unicornの設定ファイルの指定
+set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
+
+# Unicornを再起動するための記述
+after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
-  desc 'Set environment variables'
-  task :set_environment_variables do
-    on roles(:app) do
-      execute :echo, "'export RACK_ENV=production' >> ~/.bashrc"
-      # 他の環境変数も同様に設定
-    end
+  task :restart do
+    invoke 'unicorn:restart'
   end
 end
-
-before 'deploy:starting', 'deploy:set_environment_variables'

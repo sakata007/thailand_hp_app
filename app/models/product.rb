@@ -18,7 +18,6 @@ class Product < ApplicationRecord
     # 管理画面＿問い合わせ先設定画面（導入後）
 
 
-
 #  gramとpriceでnullを弾きたい （未実装）
     # def validate_choices
     #     # return unless choices.present?
