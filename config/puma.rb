@@ -6,4 +6,3 @@ stdout_redirect "#{app_dir}/log/puma.stdout.log", "#{app_dir}/log/puma.stderr.lo
 
 # rack_options対策
 rack_options ||= {}
-# @options.file_options.merge!(rack_options)
